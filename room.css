@@ -62,6 +62,10 @@ body {
 .bar-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--night); }
 .bar-btn:focus-visible, .rooms button:focus-visible, .panel a:focus-visible,
 .panel button:focus-visible, .act-btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.bar-icon { display: grid; place-items: center; padding: 4px 8px; }
+.bar-icon .snd-off { display: none; }
+.bar-icon[aria-pressed="true"] .snd-on { display: none; }
+.bar-icon[aria-pressed="true"] .snd-off { display: inline; }
 .bar-cv { background: var(--amber); color: var(--night); border-color: var(--glow); }
 .bar-cv:hover { background: var(--glow); }
 

@@ -23,6 +23,7 @@ const SOCIALS = [
 const ROOM_TEXT = {
   es: {
     classic: '← Versión clásica', lang: 'EN', close: 'Cerrar', sections: 'Secciones',
+    mute: 'Silenciar sonido', unmute: 'Activar sonido',
     hint: 'Caminá con WASD o las flechas (o tocá el piso). Acercate a un mueble y apretá E.',
     hintTouch: 'Tocá el piso para caminar y tocá un mueble para abrirlo.',
     labels: {
@@ -36,6 +37,7 @@ const ROOM_TEXT = {
   },
   en: {
     classic: '← Classic version', lang: 'ES', close: 'Close', sections: 'Sections',
+    mute: 'Mute sound', unmute: 'Unmute sound',
     hint: 'Walk with WASD or the arrow keys (or tap the floor). Get close to a piece of furniture and press E.',
     hintTouch: 'Tap the floor to walk and tap a piece of furniture to open it.',
     labels: {
@@ -175,6 +177,7 @@ function openPanel(key) {
   $('#panel-body').innerHTML = PANELS[key](t, t.ui, r);
   if (key === 'arcade') setupTicTacFade($('#panel-body .ttf'), r.ttf);
   const dialog = $('#panel');
+  Sound.blip();
   dialog.showModal();
   dialog.scrollTop = 0;
   panelOpen = true;
@@ -255,6 +258,169 @@ function setupTicTacFade(root, txt) {
   reset();
 }
 
+/* ============ Sonido ============
+   Todo sintetizado con Web Audio: no hay archivos de audio.
+   El navegador no deja sonar nada hasta el primer gesto del visitante. */
+
+const mtof = m => 440 * 2 ** ((m - 69) / 12);
+
+// Fmaj7 · Em7 · Dm7 · Cmaj7, un compás cada uno, a 76 BPM
+const PROGRESSION = [
+  { root: 41, notes: [53, 57, 60, 64] },
+  { root: 40, notes: [52, 55, 59, 62] },
+  { root: 38, notes: [50, 53, 57, 60] },
+  { root: 36, notes: [48, 52, 55, 59] },
+];
+const EIGHTH = 60 / 76 / 2;
+const ARP = [0, 2, 1, 3, 2, 1, 3, 2];
+
+const Sound = {
+  ctx: null,
+  muted: storage('muted') === '1',
+
+  start() {
+    if (this.ctx) return;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ctx = this.ctx = new AC();
+    this.master = ctx.createGain();
+    this.master.gain.value = this.muted ? 0 : 0.8;
+    this.master.connect(ctx.destination);
+
+    this.music = ctx.createBiquadFilter(); // lo-fi: sin agudos
+    this.music.type = 'lowpass';
+    this.music.frequency.value = 1600;
+    const musicGain = ctx.createGain();
+    musicGain.gain.value = 0.5;
+    this.music.connect(musicGain).connect(this.master);
+
+    const len = ctx.sampleRate;
+    this.noise = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = this.noise.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+
+    this.step8 = 0;
+    this.nextTime = ctx.currentTime + 0.1;
+    setInterval(() => this.schedule(), 50);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) ctx.suspend(); else ctx.resume();
+    });
+  },
+
+  setMuted(m) {
+    this.muted = m;
+    storage('muted', m ? '1' : '0');
+    if (this.ctx) this.master.gain.setTargetAtTime(m ? 0 : 0.8, this.ctx.currentTime, 0.05);
+  },
+
+  // Nota con envolvente: ataque corto y caída exponencial
+  tone(freq, { type = 'sine', at = this.ctx.currentTime, attack = 0.01, dur = 0.3, peak = 0.05, to = this.master, glide } = {}) {
+    const o = this.ctx.createOscillator();
+    const g = this.ctx.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, at);
+    if (glide) o.frequency.exponentialRampToValueAtTime(glide, at + dur * 0.6);
+    g.gain.setValueAtTime(0.0001, at);
+    g.gain.exponentialRampToValueAtTime(peak, at + attack);
+    g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+    o.connect(g).connect(to);
+    o.start(at);
+    o.stop(at + dur + 0.05);
+  },
+
+  schedule() {
+    const ctx = this.ctx;
+    if (this.muted || ctx.state !== 'running') { this.nextTime = ctx.currentTime + 0.1; return; }
+    while (this.nextTime < ctx.currentTime + 0.25) {
+      const t = this.nextTime;
+      const pos = this.step8 % 8;
+      const chord = PROGRESSION[Math.floor(this.step8 / 8) % 4];
+      if (pos === 0) {
+        chord.notes.forEach(n => this.tone(mtof(n), { type: 'triangle', at: t, attack: 0.5, dur: EIGHTH * 8.5, peak: 0.02, to: this.music }));
+      }
+      if (pos === 0 || pos === 5) {
+        this.tone(mtof(chord.root), { at: t, attack: 0.02, dur: EIGHTH * 3, peak: 0.07, to: this.music });
+      }
+      if (Math.random() < 0.65) {
+        this.tone(mtof(chord.notes[ARP[pos]] + 12), { type: 'triangle', at: t, dur: 0.35, peak: 0.016, to: this.music });
+      }
+      this.nextTime += EIGHTH;
+      this.step8++;
+    }
+  },
+
+  // Pisada sobre madera: un golpecito de ruido filtrado
+  footstep() {
+    if (!this.ctx || this.muted) return;
+    const t = this.ctx.currentTime;
+    const src = this.ctx.createBufferSource();
+    src.buffer = this.noise;
+    src.playbackRate.value = 0.85 + Math.random() * 0.3;
+    const f = this.ctx.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = 700 + Math.random() * 300;
+    f.Q.value = 1.5;
+    const g = this.ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.2, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+    src.connect(f).connect(g).connect(this.master);
+    src.start(t, Math.random() * 0.9, 0.1);
+  },
+
+  // Ronroneo: ruido grave pulsado a ~23 Hz, más una campanita por corazón
+  purr() {
+    if (!this.ctx || this.muted) return;
+    const ctx = this.ctx;
+    const t = ctx.currentTime;
+    const src = ctx.createBufferSource();
+    src.buffer = this.noise;
+    src.loop = true;
+    const f = ctx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.value = 220;
+    const pulse = ctx.createGain();
+    pulse.gain.value = 0.5;
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 23;
+    const depth = ctx.createGain();
+    depth.gain.value = 0.5;
+    lfo.connect(depth).connect(pulse.gain);
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0.0001, t);
+    env.gain.exponentialRampToValueAtTime(0.5, t + 0.15);
+    env.gain.setValueAtTime(0.5, t + 0.9);
+    env.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+    src.connect(f).connect(pulse).connect(env).connect(this.master);
+    src.start(t);
+    lfo.start(t);
+    src.stop(t + 1.6);
+    lfo.stop(t + 1.6);
+    [1318.5, 1568, 1760].forEach((freq, i) => this.tone(freq, { at: t + i * 0.22, dur: 0.4, peak: 0.025 }));
+  },
+
+  blip() {
+    if (!this.ctx || this.muted) return;
+    this.tone(660, { dur: 0.12, peak: 0.04, glide: 990 });
+  },
+};
+
+const startSound = () => Sound.start();
+['pointerdown', 'keydown'].forEach(ev => window.addEventListener(ev, startSound, { once: true }));
+
+function applySoundButton() {
+  const btn = $('#sound-toggle');
+  btn.setAttribute('aria-pressed', String(Sound.muted));
+  btn.setAttribute('aria-label', Sound.muted ? ROOM_TEXT[lang].unmute : ROOM_TEXT[lang].mute);
+  btn.title = btn.getAttribute('aria-label');
+}
+
+$('#sound-toggle').addEventListener('click', () => {
+  Sound.start();
+  Sound.setMuted(!Sound.muted);
+  applySoundButton();
+});
+
 /* ============ Textos de la página ============ */
 
 function applyLanguage() {
@@ -268,6 +434,7 @@ function applyLanguage() {
   const cv = $('#cv-link');
   cv.href = `cv-${lang}.pdf`;
   cv.setAttribute('download', lang === 'es' ? 'CV Camila Termine (ES).pdf' : 'Resume Camila Termine (EN).pdf');
+  applySoundButton();
   $('#room-menu').innerHTML = SECTIONS.map(k => `<li><button data-open="${k}">${r.labels[k]}</button></li>`).join('');
   window.dispatchEvent(new Event('roomlang'));
 }
@@ -454,6 +621,7 @@ class Room extends Phaser.Scene {
     // Se da vuelta para mirar a quien lo acaricia y se queda un rato
     const oct = (Math.round(Math.atan2(this.player.y - c.y, this.player.x - c.x) / (Math.PI / 4)) + 8) % 8;
     c.facing = OCTANT_TO_ROW[oct];
+    Sound.purr();
     this.catSit(5000);
     c.setDepth(c.y);
     this.pettingUntil = this.time.now + 1800; // sin el cartel "E" encima del ronroneo
@@ -520,6 +688,10 @@ class Room extends Phaser.Scene {
       const oct = (Math.round(Math.atan2(vy, vx) / (Math.PI / 4)) + 8) % 8;
       this.facing = OCTANT_TO_ROW[oct];
       this.player.anims.play(`walk-${this.facing}`, true);
+      if (this.time.now - (this.lastStep || 0) > 300) {
+        Sound.footstep();
+        this.lastStep = this.time.now;
+      }
     } else {
       this.player.anims.play(`idle-${this.facing}`, true);
     }
