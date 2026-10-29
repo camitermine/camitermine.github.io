@@ -1,24 +1,24 @@
 /* =========================================================
    Portfolio · Camila Términe
-   Dirección: archivo / catálogo. Papel frío, tinta pizarra y un
-   solo acento azul de sello. Lo audaz es el hero; el resto, quieto.
+   Dirección: archivo / catálogo con la paleta "Cozy Night Studio"
+   del modo exploración: noche índigo, crema, ámbar y ciruela.
    ========================================================= */
 
 /* ============ Tokens ============ */
 :root {
-  --paper: #e8ecf0;
-  --paper-alt: #dfe4ea;
-  --card: #f7f9fb;
-  --ink: #17212c;
-  --ink-soft: #4c5968;
-  --rule: #c4cdd7;
-  --accent: #2340c4;
-  --accent-ink: #f7f9fb;
-  --hatch: #9aa6b4;
+  --paper: #f6efe4;
+  --paper-alt: #efe4d3;
+  --card: #fffaf2;
+  --ink: #2a2140;
+  --ink-soft: #5a4a7a;
+  --rule: #dccbb4;
+  --accent: #84486b;
+  --accent-ink: #fffaf2;
+  --hatch: #c4a98a;
   --bug: #b3352d;
-  --feature: #9a6400;
-  --positive: #1f7a4d;
-  --other: #66727f;
+  --feature: #3f55c0;
+  --positive: #3f6b47;
+  --other: #6f6180;
   --font-display: 'Bricolage Grotesque', 'Arial Narrow', sans-serif;
   --font-body: 'Newsreader', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -28,18 +28,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #0f151d; --paper-alt: #131a23; --card: #18212c;
-    --ink: #e6eaf0; --ink-soft: #9ba7b5; --rule: #2b3643;
-    --accent: #8ea3ff; --accent-ink: #0f151d; --hatch: #4a5768;
-    --bug: #ff8a80; --feature: #f0b64a; --positive: #6fcf97; --other: #93a0ad;
+    --paper: #1a1423; --paper-alt: #211a30; --card: #2a2140;
+    --ink: #f2e8d8; --ink-soft: #b9a9c9; --rule: #3b2f5c;
+    --accent: #f0b64a; --accent-ink: #1a1423; --hatch: #5a4a7a;
+    --bug: #ff8f8f; --feature: #8ea3ff; --positive: #8fbf8a; --other: #a99bbd;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #0f151d; --paper-alt: #131a23; --card: #18212c;
-  --ink: #e6eaf0; --ink-soft: #9ba7b5; --rule: #2b3643;
-  --accent: #8ea3ff; --accent-ink: #0f151d; --hatch: #4a5768;
-  --bug: #ff8a80; --feature: #f0b64a; --positive: #6fcf97; --other: #93a0ad;
+  --paper: #1a1423; --paper-alt: #211a30; --card: #2a2140;
+  --ink: #f2e8d8; --ink-soft: #b9a9c9; --rule: #3b2f5c;
+  --accent: #f0b64a; --accent-ink: #1a1423; --hatch: #5a4a7a;
+  --bug: #ff8f8f; --feature: #8ea3ff; --positive: #8fbf8a; --other: #a99bbd;
   color-scheme: dark;
 }
 
@@ -113,6 +113,7 @@ img { max-width: 100%; display: block; }
 .nav-links a { font: 500 1rem var(--font-display); text-decoration: none; color: var(--ink-soft); }
 .nav-links a:hover, .nav-links a.active { color: var(--ink); }
 .nav-links a.active { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.nav-links a.nav-room { color: var(--accent); }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .lang-sep { margin: 0 3px; opacity: .4; }
 html[lang="es"] .lang-en, html[lang="en"] .lang-es { opacity: .4; }
