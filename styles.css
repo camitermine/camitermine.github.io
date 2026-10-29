@@ -167,11 +167,12 @@ html[lang="es"] .lang-en, html[lang="en"] .lang-es { opacity: .4; }
 .game-rule { font-size: 1rem; line-height: 1.45; color: var(--ink-soft); margin-bottom: 16px; }
 
 .board {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-  aspect-ratio: 1; max-width: 360px; margin-inline: auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 8px;
+  width: 100%; aspect-ratio: 1; max-width: 360px; margin-inline: auto;
 }
 .cell {
-  position: relative; display: grid; place-items: center;
+  /* min-*: 0 para que la ficha no agrande su fila al aparecer */
+  position: relative; display: grid; place-items: center; min-width: 0; min-height: 0;
   background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
   cursor: pointer; padding: 0;
   /* Un toque = una jugada: sin zoom por doble toque ni demora en mobile */
