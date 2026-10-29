@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Camila Términe, Resume</title>
+<!-- Fuente del CV en inglés. Para regenerar el PDF:
+     chrome --headless --no-pdf-header-footer --print-to-pdf=cv-en.pdf cv/cv-en.html -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Newsreader:opsz,wght@6..72,400..600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 15mm 16mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #17212c; font: 10pt/1.42 'Newsreader', Georgia, serif; }
+  h1, h2, h3, .meta, .when { font-family: 'Bricolage Grotesque', Arial, sans-serif; }
+  h1 { font-size: 26pt; font-weight: 700; font-stretch: 80%; letter-spacing: -.02em; line-height: 1; margin: 0 0 4pt; }
+  .title { font: 600 11.5pt 'Bricolage Grotesque', sans-serif; color: #2340c4; margin: 0 0 6pt; }
+  .meta { font-size: 8.8pt; color: #4c5968; margin: 0; }
+  .meta a { color: inherit; text-decoration: none; }
+  h2 { font-size: 11pt; font-weight: 700; color: #2340c4; margin: 13pt 0 5pt; padding-bottom: 2pt; border-bottom: .6pt solid #c4cdd7; }
+  h3 { font-size: 10.2pt; font-weight: 650; margin: 0; }
+  .item { margin-bottom: 8pt; break-inside: avoid; }
+  .head { display: flex; justify-content: space-between; gap: 12pt; align-items: baseline; }
+  .when { font-size: 8.8pt; color: #4c5968; white-space: nowrap; }
+  .context { margin: 1pt 0 2pt; color: #4c5968; }
+  p { margin: 0 0 4pt; }
+  ul { margin: 2pt 0 0; padding-left: 12pt; }
+  li { margin-bottom: 2pt; }
+  li::marker { color: #2340c4; }
+  .skills { display: grid; grid-template-columns: 88pt 1fr; gap: 2pt 10pt; margin: 0; }
+  .skills dt { font: 600 9pt/1.42 'Bricolage Grotesque', sans-serif; }
+  .skills dd { margin: 0; }
+  .repo { font: 8.6pt 'Bricolage Grotesque', sans-serif; color: #2340c4; white-space: nowrap; }
+</style>
+</head>
+<body>
+  <h1>Camila Denise Términe</h1>
+  <p class="title">Backend Software Engineer | Java, Spring Boot, Kotlin, React / TypeScript, GenAI</p>
+  <p class="meta">Buenos Aires, Argentina &nbsp;|&nbsp; +54 9 11 2392-1602 &nbsp;|&nbsp; camila.termine@gmail.com</p>
+  <p class="meta"><a href="https://camitermine.github.io">camitermine.github.io</a> &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/camila-termine">linkedin.com/in/camila-termine</a> &nbsp;|&nbsp; <a href="https://github.com/camitermine">github.com/camitermine</a></p>
+
+  <h2>Profile</h2>
+  <p>Software Engineer with 2+ years building production software, focused on backend and client-server systems. At CONICET I built Java/Spring Boot backend modules for SIGERH, Argentina’s national HR system with more than 30,000 users: I optimized SQL queries on a schema of over 300 tables, worked on integrations with external systems and fixed production incidents every week. At Crisalu Games I design client-server state sync and persistence for a multiplayer game published by Team17, where I diagnosed race conditions and cut desync bugs by 70%. I use GenAI across the development cycle: my own Claude Code and MCP agents that review code before every pull request, and an API that classifies user feedback with LLMs and structured outputs. I document what I build and help onboard new teammates.</p>
+
+  <h2>Technical skills</h2>
+  <dl class="skills">
+    <dt>Languages</dt><dd>Java, Kotlin, TypeScript, JavaScript, Python, C#, SQL, HTML5, CSS3</dd>
+    <dt>Backend</dt><dd>Spring Boot, FastAPI, Hibernate, JPA, Struts 2, REST APIs, OpenAPI/Swagger, JasperReports, layered architecture, design patterns (Repository, Factory, Strategy, Observer, Command, MVC/MVVM), external service integration</dd>
+    <dt>Databases</dt><dd>MySQL, PostgreSQL, HBase (NoSQL), Flyway, relational and NoSQL modeling, SQL query optimization</dd>
+    <dt>Frontend</dt><dd>React, TypeScript, React Native (Expo), async REST consumption, state management, validation and error handling</dd>
+    <dt>Testing &amp; DevOps</dt><dd>JUnit, Mockito, Testcontainers, unit and integration tests, CI/CD (GitHub Actions, Jenkins), Docker, Docker Compose, Git, GlassFish, Linux</dd>
+    <dt>AI &amp; automation</dt><dd>Claude API (Anthropic Java SDK), structured outputs, Claude Code, Model Context Protocol (MCP), code review agents, n8n, prompt engineering</dd>
+    <dt>Client-server</dt><dd>Unity, FishNet (host-authoritative netcode), Steamworks SDK, state serialization and persistence</dd>
+    <dt>Practices</dt><dd>Scrum, Kanban, pull requests and code review, technical documentation, Clean Code, Jira</dd>
+  </dl>
+
+  <h2>Experience</h2>
+  <div class="item">
+    <div class="head"><h3>Software Engineer (C# / Unity), Crisalu Games</h3><span class="when">Aug 2025 – Present, Remote</span></div>
+    <p class="context">Goblin Cleanup: co-op multiplayer game for up to 4 players, published by Team17 on Steam. Started part-time alongside CONICET, then moved to full-time.</p>
+    <ul>
+      <li>Designed the multiplayer save and restore system from scratch: serialization, checkpoints and entity rebuilding from the host’s authoritative state, compatible across game versions.</li>
+      <li>Cut reported desync bugs by 70% (around 50 issues) by diagnosing race conditions and fixing real-time client-server state synchronization.</li>
+      <li>Integrated Claude Code with Unity through the Model Context Protocol (MCP) and built custom agents and skills that audit the code before every pull request to catch bugs and speed up refactors.</li>
+      <li>Built synchronized multiplayer features (emotes, photo mode), keyboard and gamepad navigation across all menus with UI Toolkit, compatible with Steam Deck, and the achievements system with the Steamworks SDK.</li>
+      <li>Resolved 300+ Jira tickets using Scrum and Kanban, handled technical communication in English with Team17 and onboarded a new team member.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Java Backend Developer, CONICET</h3><span class="when">Sep 2024 – Oct 2025, Buenos Aires</span></div>
+    <p class="context">SIGERH: nationwide human resources system with more than 30,000 users.</p>
+    <ul>
+      <li>Built the working-hours certification module: search of each employee’s clock-in records by CUIL and a monthly PDF report with JasperReports showing entries, exits and hour differences (Java, Spring Boot, Hibernate, Struts 2).</li>
+      <li>Built part of the bank account change module: a request queue with approval restricted to administrators, and CBU validation using its check-digit algorithm to verify the account belongs to the selected bank.</li>
+      <li>Optimized the SQL behind the request filters on a MySQL schema of 300+ tables, improving response times, and fixed 6–7 production incidents per week.</li>
+      <li>Worked on integrations with external systems, such as the notification service and SINE.</li>
+      <li>Worked with pull requests and peer code review, tests and cross-validation in the testing environment; deployed to development and testing and updated their databases through Jenkins jobs.</li>
+      <li>Documented new modules and technical research, and helped a new team member learn the system’s business rules.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Data Manager &amp; Post-production Assistant, CONICET Documental</h3><span class="when">Aug 2013 – Aug 2024, Buenos Aires</span></div>
+    <ul>
+      <li>Managed backups and organization of 300+ TB of footage over more than 10 years with zero data loss, and catalogued material for 35+ documentaries broadcast on TV Pública, Paka Paka and Encuentro.</li>
+      <li>Maintained the company website on WordPress and prepared transcripts and accessible captions for broadcast on Aerolíneas Argentinas flights.</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="item">
+    <div class="head"><h3>Steam Review Insights: Spring Boot, Claude API, n8n</h3><span class="repo">github.com/camitermine/steam-review-insights</span></div>
+    <ul>
+      <li>Built a Spring Boot REST API that imports all 2,367 Goblin Cleanup reviews from Steam’s public API and classifies user feedback with Claude Haiku 4.5 across 24 languages: found 449 bug reports and 344 feature requests for less than USD 1.</li>
+      <li>Reduced cost by batching 20 reviews per request with structured outputs, and designed batch processing that resumes without data loss if the API fails.</li>
+      <li>Automated a weekly Discord summary of new bugs and requests with n8n; containerized the app with PostgreSQL, Flyway migrations and Docker Compose, with CI on GitHub Actions and tests in JUnit, Mockito and Testcontainers.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Tic-Tac-Fade, AI-assisted development: C#, Unity 6, Claude Code, MCP</h3><span class="repo">github.com/camitermine/tic-tac-fade</span></div>
+    <ul>
+      <li>Online multiplayer game built iteratively with Claude Code and MCP under human supervision, documented as an experiment: one log entry per iteration recording what the AI was asked, what it produced and what had to be corrected, with agent instructions versioned in the repo.</li>
+      <li>Separated the game rules into a pure domain module with no engine dependencies, covered by unit tests and reused across local play, online play and a future AI opponent; architecture decisions recorded as ADRs.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>MercadoLite and MercadoLite Envíos: React, TypeScript, Kotlin, UNSAM (team)</h3></div>
+    <ul>
+      <li>Built a marketplace e-commerce app as a team on a university MVVM framework, consuming a product REST API: catalog with search, category filter, price sorting and pagination, order flow with states, API validation and error handling, and ViewModel and domain tests with CI on GitHub Actions.</li>
+      <li>Built MercadoLite Envíos, a shipping management system with a React/TypeScript frontend and our own Kotlin REST API: KPI dashboard, shipment lifecycle with state changes and delivery dates, carrier management, filters and pagination, with unit tests on both ends. Marketplace orders create shipments through the API.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Pasaporte BA: Python, FastAPI, MySQL, HBase, React Native, UNSAM (team)</h3><span class="repo">github.com/camitermine/Pasaporte-BA</span></div>
+    <ul>
+      <li>Built a mobile app for check-ins at bars, cafés, cultural venues and murals in Buenos Aires, with a FastAPI backend with swappable persistence (Repository and Factory patterns): the same API runs on MySQL or HBase depending on a request header.</li>
+      <li>Modeled the data in both engines (relational schema; row keys, index tables and counters in HBase), with Docker Compose, a React Native (Expo) frontend and a script that compares results and timings of the same queries on both engines.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <h3>Other projects</h3>
+    <ul>
+      <li><strong>Xpace</strong> (Kotlin, Gradle), UNSAM team project: space expedition management with object-oriented modeling, Strategy, Observer and Command patterns, a mission state machine, domain validation rules, unit tests with measured coverage and CI on GitHub Actions, using GitFlow and reviewed pull requests.</li>
+      <li><strong>Neural network from scratch</strong> (Python, NumPy): player behavior classification with linear algebra and backpropagation implemented by hand.</li>
+      <li><strong>n8n automation bots</strong>: a WhatsApp bot that answers FAQs and forwards questions by email, and automated newsletters sent to Discord.</li>
+      <li><strong>Arkanoid in 8086 Assembly</strong>: rendering, input and game logic at the lowest level, with no engine or libraries.</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <ul>
+    <li><strong>University Degree in Computer Programming</strong>, UNSAM, 2022 – 2026. Relevant courses: Databases (relational and NoSQL), Concurrent and Distributed Programming, Computer Networks, Algorithms I, II and III, Artificial Intelligence.</li>
+    <li>Java University: zero to expert, Udemy, 2025 (150 hours)</li>
+    <li>Unity Specialization, Codo a Codo 4.0, Buenos Aires City Government, 2022 (208 hours)</li>
+    <li>Full Stack Java, Codo a Codo 4.0, Agencia de Aprendizaje a lo largo de la Vida, 2021 (198 hours)</li>
+    <li>Oracle Next Education (ONE), Oracle and Alura Latam, 2022 – 2023: Programming, HTML and CSS, Front End and React tracks</li>
+    <li>Big data for effective public management, National Institute of Public Administration (INAP), 2024</li>
+  </ul>
+
+  <h2>Languages</h2>
+  <p>Spanish (native) | English B2 (daily technical communication with international publisher Team17)</p>
+</body>
+</html>

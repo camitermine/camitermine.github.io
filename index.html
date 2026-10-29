@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Camila Términe · Software Engineer</title>
-  <meta name="description" content="Software Engineer: backend Java/Spring Boot, C#/Unity (Goblin Cleanup, publicado por Team17 en Steam) e integración de IA con Claude. Buenos Aires, Argentina.">
+  <title>Camila Términe, Backend Software Engineer</title>
+  <meta name="description" content="Backend Software Engineer en Buenos Aires: Java, Spring Boot, Kotlin y GenAI. Sistemas cliente-servidor y persistencia en Goblin Cleanup (Team17, Steam) y herramientas con la API de Claude.">
   <meta name="author" content="Camila Denise Términe">
-  <meta property="og:title" content="Camila Términe · Software Engineer">
-  <meta property="og:description" content="Backend Java · C# / Unity · AI Automation. Proyectos, experiencia y contacto.">
+  <meta property="og:title" content="Camila Términe, Backend Software Engineer">
+  <meta property="og:description" content="Java, Spring Boot, Kotlin y GenAI. Proyectos, experiencia y contacto.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://camitermine.github.io/">
-  <meta name="theme-color" content="#0b0f14">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0f14'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='monospace' font-weight='700' font-size='30' fill='%237cf5a8'%3ECT%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#e8ecf0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%232340c4'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%23f7f9fb'%3ECT%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     // Aplica tema e idioma guardados antes de pintar, para evitar parpadeos.
@@ -30,7 +30,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Camila Denise Términe",
-    "jobTitle": "Software Engineer",
+    "jobTitle": "Backend Software Engineer",
     "address": { "@type": "PostalAddress", "addressLocality": "Buenos Aires", "addressCountry": "AR" },
     "url": "https://camitermine.github.io/",
     "sameAs": ["https://github.com/camitermine", "https://www.linkedin.com/in/camila-termine"]
@@ -39,18 +39,14 @@
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">Saltar al contenido</a>
-  <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
-    <a href="#top" class="nav-logo" aria-label="Inicio">
-      <span class="logo-bracket">&lt;</span>CT<span class="logo-bracket">/&gt;</span>
-    </a>
+    <a href="#top" class="wordmark">Camila Términe</a>
     <nav class="nav-links" id="nav-links" aria-label="Principal">
-      <a href="#about" data-i18n="nav.about">Sobre mí</a>
+      <a href="#ia" data-i18n="nav.ai">GenAI</a>
       <a href="#experience" data-i18n="nav.experience">Experiencia</a>
       <a href="#projects" data-i18n="nav.projects">Proyectos</a>
-      <a href="#skills" data-i18n="nav.skills">Stack</a>
+      <a href="#about" data-i18n="nav.about">Sobre mí</a>
       <a href="#contact" data-i18n="nav.contact">Contacto</a>
     </nav>
     <div class="nav-actions">
@@ -61,7 +57,7 @@
         <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
       </button>
-      <a class="btn btn-small btn-primary nav-cv" href="cv-es.pdf" download data-cv data-i18n="nav.cv">Descargar CV</a>
+      <a class="btn btn-primary btn-small nav-cv" href="cv-es.pdf" download data-cv data-i18n="nav.cv">Descargar CV</a>
       <button class="icon-btn menu-btn" id="menu-toggle" aria-label="Menú" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -69,57 +65,111 @@
   </header>
 
   <main id="main">
-    <!-- HERO -->
+    <!-- HERO: nombre + línea de carrera proporcional al tiempo -->
     <section class="hero" id="top">
-      <div class="hero-grid" aria-hidden="true"></div>
-      <div class="container hero-inner">
-        <p class="status reveal"><span class="status-dot"></span><span data-i18n="hero.status">Abierta a nuevas oportunidades · Remoto o Buenos Aires</span></p>
-        <h1 class="hero-title reveal">
-          <span data-i18n="hero.hello">Hola, soy</span>
-          <span class="hero-name">Camila Términe</span>
-        </h1>
-        <p class="hero-role reveal mono">
-          &gt; <span id="typed" aria-live="polite">Software Engineer</span><span class="caret" aria-hidden="true">_</span>
-        </p>
-        <p class="hero-lead reveal" data-i18n="hero.lead">Construyo backends en Java que usan miles de personas, sistemas multiplayer en C# para un juego publicado en Steam, y herramientas que usan IA para resolver problemas reales.</p>
-        <div class="hero-cta reveal">
-          <a href="#projects" class="btn btn-primary" data-i18n="hero.cta.projects">Ver proyectos</a>
-          <a href="#contact" class="btn btn-ghost" data-i18n="hero.cta.contact">Contactarme</a>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <h1 class="hero-name"><span>Camila</span> <span>Términe</span></h1>
+            <p class="hero-role" data-i18n="hero.role">Backend Software Engineer. Java, Spring Boot, Kotlin y GenAI.</p>
+            <p class="hero-lead" data-i18n="hero.lead">Desarrollo backends y sistemas cliente-servidor: módulos Java para un sistema de RRHH con más de 30.000 usuarios, y la persistencia y sincronización de un juego multiplayer publicado por Team17 en Steam. Uso GenAI en todo el ciclo de desarrollo, siempre con revisión humana.</p>
+            <div class="hero-cta">
+              <a href="#ia" class="btn btn-primary" data-i18n="hero.cta.ai">Ver qué construí con IA</a>
+              <a href="cv-es.pdf" download data-cv class="btn btn-ghost" data-i18n="hero.cta.cv">Descargar CV</a>
+            </div>
+          </div>
+
+          <!-- Tic-Tac-Fade jugable: un click por jugada, sin confirmación -->
+          <aside class="game" aria-labelledby="game-title">
+            <div class="game-head">
+              <h2 id="game-title" class="game-title">Tic-Tac-Fade</h2>
+              <div class="game-modes" role="group" aria-label="Modo de juego" id="game-modes">
+                <button class="game-mode" data-mode="cpu" aria-pressed="true" data-i18n="game.cpu">Contra la máquina</button>
+                <button class="game-mode" data-mode="pvp" aria-pressed="false" data-i18n="game.pvp">Dos jugadores</button>
+              </div>
+            </div>
+            <p class="game-rule" data-i18n="game.rule">Cada jugador tiene como máximo tres fichas. Al poner la cuarta, desaparece la más vieja.</p>
+            <div class="board" id="board" role="grid" aria-label="Tablero"></div>
+            <div class="game-foot">
+              <p class="game-status" id="game-status" aria-live="polite"></p>
+              <button class="btn btn-ghost btn-small" id="game-reset" data-i18n="game.reset">Nueva partida</button>
+            </div>
+          </aside>
         </div>
-        <dl class="stats reveal-stagger">
-          <div class="stat"><dt><span class="count" data-to="2" data-suffix="+">0</span></dt><dd data-i18n="stats.years">años desarrollando software en producción</dd></div>
-          <div class="stat"><dt><span class="count" data-to="30000" data-suffix="+">0</span></dt><dd data-i18n="stats.users">usuarios en el sistema de RRHH de CONICET</dd></div>
-          <div class="stat"><dt><span class="count" data-to="70" data-prefix="−" data-suffix="%">0</span></dt><dd data-i18n="stats.desync">bugs de desincronización en Goblin Cleanup</dd></div>
-          <div class="stat"><dt><span class="count" data-to="2367">0</span></dt><dd data-i18n="stats.reviews">reseñas de Steam clasificadas con IA</dd></div>
-        </dl>
+
+        <figure class="career" aria-labelledby="career-caption">
+          <figcaption id="career-caption" class="career-caption" data-i18n="career.caption">Antes de programar pasé once años cuidando el archivo audiovisual de CONICET. Desde 2024 escribo el software que guarda y sincroniza datos.</figcaption>
+          <div class="career-rail" id="career-rail" aria-hidden="true"></div>
+          <ol class="career-notes" id="career-notes"></ol>
+        </figure>
       </div>
-      <a href="#about" class="scroll-hint" aria-label="Bajar"><span></span></a>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="container about">
-        <div class="section-head reveal">
-          <p class="eyebrow mono">01 · <span data-i18n="nav.about">Sobre mí</span></p>
-          <h2 data-i18n="about.title">Entre el backend, los videojuegos y la IA</h2>
-        </div>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p data-i18n="about.p1">Soy Software Engineer en Buenos Aires. Hoy trabajo en <strong>Crisalu Games</strong> en <strong>Goblin Cleanup</strong>, un juego cooperativo para hasta 4 jugadores publicado por <strong>Team17</strong> en Steam, donde me ocupo del guardado de partidas, la sincronización multiplayer y la integración con Steamworks.</p>
-            <p data-i18n="about.p2">Antes desarrollé en Java/Spring Boot para <strong>SIGERH</strong>, el sistema de recursos humanos de CONICET que usan más de 30.000 personas en todo el país.</p>
-            <p data-i18n="about.p3">Y antes de programar pasé 10 años en <strong>CONICET Documental</strong>, gestionando más de 300 TB de material audiovisual para más de 35 documentales. Tengo crédito en IMDb por la postproducción de <em>Maelstrom: 2001</em>. De ahí viene mi obsesión por no perder datos.</p>
-            <p data-i18n="about.p4">Uso IA como parte de mi forma de trabajar: agentes con Claude Code y MCP para revisar código, y la API de Claude para construir herramientas como Steam Review Insights.</p>
-          </div>
-          <aside class="about-card reveal tilt" aria-label="Datos rápidos">
-            <div class="avatar"><img src="assets/foto-perfil.jpg" alt="Foto de Camila Términe" width="160" height="160" loading="lazy"></div>
-            <ul class="facts">
-              <li><span class="fact-k mono" data-i18n="facts.location">ubicación</span><span>Buenos Aires, AR</span></li>
-              <li><span class="fact-k mono" data-i18n="facts.now">ahora</span><span>Crisalu Games · Unity/C#</span></li>
-              <li><span class="fact-k mono" data-i18n="facts.study">estudio</span><span data-i18n="facts.studyv">Tec. Univ. en Programación · UNSAM (2027)</span></li>
-              <li><span class="fact-k mono" data-i18n="facts.langs">idiomas</span><span data-i18n="facts.langsv">Español nativo · Inglés B2</span></li>
-              <li><span class="fact-k mono" data-i18n="facts.method">método</span><span>Scrum · Kanban</span></li>
+    <!-- GENAI -->
+    <section class="section" id="ia">
+      <div class="container">
+        <header class="section-head">
+          <h2 data-i18n="ai.title">Cómo uso GenAI</h2>
+          <p class="section-lead" data-i18n="ai.lead">La uso para construir producto y para desarrollar. En los dos casos dejo registro de qué hizo el modelo y qué corregí yo.</p>
+        </header>
+
+        <article class="feature" aria-labelledby="sri-title">
+          <div class="feature-info">
+            <h3 id="sri-title">Steam Review Insights</h3>
+            <p class="feature-sub" data-i18n="sri.sub">API REST en Spring Boot que clasifica feedback de jugadores con Claude</p>
+            <p data-i18n="sri.desc">Importa las 2.367 reseñas de Goblin Cleanup desde la API pública de Steam y las clasifica con Claude Haiku 4.5 en bugs, pedidos de mejora, comentarios positivos y otros, en 24 idiomas. Cada lunes, un flujo de n8n publica en Discord un resumen con los bugs y pedidos nuevos.</p>
+            <ul class="points">
+              <li data-i18n="sri.p1">449 reportes de bugs y 344 pedidos de mejora detectados, por menos de USD 1 en total.</li>
+              <li data-i18n="sri.p2">20 reseñas por llamada con structured outputs, y procesamiento por lotes que se retoma sin pérdidas si la API falla.</li>
+              <li data-i18n="sri.p3">PostgreSQL con migraciones Flyway, Docker Compose, tests con JUnit, Mockito y Testcontainers, y CI en GitHub Actions.</li>
             </ul>
-          </aside>
+            <p class="stack">Java 21, Spring Boot 4, Anthropic Java SDK, PostgreSQL, Docker, n8n</p>
+            <a class="btn btn-ghost btn-small" href="https://github.com/camitermine/steam-review-insights" target="_blank" rel="noopener" data-i18n="link.code">Ver código en GitHub</a>
+          </div>
+
+          <div class="demo" aria-label="Demo del clasificador">
+            <p class="demo-endpoint mono">GET /api/reviews/stats</p>
+            <div class="demo-chart" id="demo-chart" role="img" aria-label="449 bugs, 344 pedidos de mejora, 1331 positivas, 243 otras"></div>
+            <div class="demo-review" aria-live="polite">
+              <p class="demo-meta" id="demo-meta"></p>
+              <p class="demo-text" id="demo-text"></p>
+              <p class="demo-result" id="demo-result"></p>
+            </div>
+            <button class="btn btn-ghost btn-small" id="demo-next" data-i18n="demo.next">Clasificar otra reseña real</button>
+          </div>
+        </article>
+
+        <article class="feature feature-log" aria-labelledby="ttf-title">
+          <div class="feature-info">
+            <h3 id="ttf-title">Tic-Tac-Fade</h3>
+            <p class="feature-sub" data-i18n="ttf.sub">Desarrollo asistido por IA, documentado como experimento</p>
+            <p data-i18n="ttf.desc">Un tateti táctico multiplayer en Unity 6 donde cada jugador tiene como máximo tres fichas. Lo construyo de forma iterativa con Claude Code y el MCP de Unity, bajo mi supervisión. Cada iteración queda registrada: qué le pedí a la IA, qué produjo y qué tuve que corregir.</p>
+            <ul class="points">
+              <li data-i18n="ttf.p1">Las reglas viven en un módulo de dominio en C# puro, sin dependencias del motor, con 33 tests unitarios y reutilizable en el modo local, el online y un futuro oponente con IA.</li>
+              <li data-i18n="ttf.p2">Decisiones de arquitectura registradas en ADRs, e instrucciones del agente versionadas en el repo (CLAUDE.md).</li>
+            </ul>
+            <p class="stack">C#, Unity 6, Claude Code, MCP, Unity Gaming Services</p>
+            <a class="btn btn-ghost btn-small" href="https://github.com/camitermine/tic-tac-fade" target="_blank" rel="noopener" data-i18n="link.code">Ver código en GitHub</a>
+          </div>
+
+          <div class="log" id="log">
+            <div class="log-head">
+              <a class="log-file mono" href="https://github.com/camitermine/tic-tac-fade/blob/main/docs/ai-log.md" target="_blank" rel="noopener">docs/ai-log.md</a>
+              <div class="log-nav">
+                <button class="icon-btn" id="log-prev" aria-label="Entrada anterior"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+                <span class="log-count" id="log-count" aria-live="polite"></span>
+                <button class="icon-btn" id="log-next" aria-label="Entrada siguiente"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+              </div>
+            </div>
+            <div class="log-body" id="log-body"></div>
+          </div>
+        </article>
+
+        <div class="ai-more">
+          <article>
+            <h3 data-i18n="ai.agents.title">Agentes de revisión en Crisalu Games</h3>
+            <p data-i18n="ai.agents.desc">Integré Claude Code con Unity mediante Model Context Protocol y creé agentes y skills propios que auditan el código antes de cada pull request, para detectar bugs y acelerar los refactors.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -127,109 +177,87 @@
     <!-- EXPERIENCE -->
     <section class="section section-alt" id="experience">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow mono">02 · <span data-i18n="nav.experience">Experiencia</span></p>
-          <h2 data-i18n="exp.title">Dónde trabajé y qué logré</h2>
-        </div>
-        <ol class="timeline" id="timeline"></ol>
+        <header class="section-head">
+          <h2 data-i18n="exp.title">Experiencia</h2>
+        </header>
+        <ol class="jobs" id="jobs"></ol>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section class="section" id="projects">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow mono">03 · <span data-i18n="nav.projects">Proyectos</span></p>
-          <h2 data-i18n="proj.title">Cosas que construí</h2>
+        <header class="section-head">
+          <h2 data-i18n="proj.title">Otros proyectos</h2>
+          <p class="section-lead" data-i18n="proj.lead">Trabajo profesional y de la facultad, ordenado como un catálogo. Filtrá por área.</p>
+        </header>
+        <div class="tabs" role="group" aria-label="Filtrar proyectos" id="filters">
+          <button class="tab" data-filter="all" aria-pressed="true" data-i18n="filter.all">Todos</button>
+          <button class="tab" data-filter="backend" aria-pressed="false">Backend</button>
+          <button class="tab" data-filter="frontend" aria-pressed="false">Frontend</button>
+          <button class="tab" data-filter="ai" aria-pressed="false" data-i18n="filter.ai">IA</button>
+          <button class="tab" data-filter="gamedev" aria-pressed="false">Game dev</button>
         </div>
-
-        <!-- Proyecto destacado con demo interactiva -->
-        <article class="featured reveal" aria-labelledby="sri-title">
-          <div class="featured-info">
-            <p class="tag-featured mono" data-i18n="proj.featured">★ Proyecto destacado</p>
-            <h3 id="sri-title">Steam Review Insights</h3>
-            <p data-i18n="sri.desc">API REST que importa las reseñas de Goblin Cleanup desde Steam y las clasifica con Claude en bugs, pedidos de mejora y comentarios positivos. Cada lunes, un flujo de n8n manda a Discord un resumen de la semana escrito por IA, con las reseñas destacadas y su link a Steam.</p>
-            <ul class="featured-points">
-              <li data-i18n="sri.p1">449 bugs y 344 pedidos de mejora detectados en 24 idiomas, por menos de USD 1</li>
-              <li data-i18n="sri.p2">20 reseñas por llamada con structured outputs: ~USD 0,005 por lote</li>
-              <li data-i18n="sri.p3">PostgreSQL + Flyway, Docker Compose, 25 tests con Testcontainers y CI</li>
-            </ul>
-            <ul class="chips" aria-label="Tecnologías">
-              <li>Java 21</li><li>Spring Boot 4</li><li>Claude API</li><li>PostgreSQL</li><li>Docker</li><li>n8n</li><li>GitHub Actions</li>
-            </ul>
-            <div class="featured-links">
-              <a class="btn btn-primary btn-small" href="https://github.com/camitermine/steam-review-insights" target="_blank" rel="noopener" data-i18n="proj.code">Ver código</a>
-            </div>
-          </div>
-
-          <div class="demo" aria-label="Demo interactiva">
-            <div class="demo-bar"><span></span><span></span><span></span><p class="mono">GET /api/reviews/stats</p></div>
-            <div class="demo-body">
-              <div class="demo-chart" id="demo-chart" role="img" aria-label="449 bugs, 344 pedidos de mejora, 1331 positivas, 243 otras"></div>
-              <p class="demo-hint mono" data-i18n="demo.hint">↓ Probá el clasificador con reseñas reales</p>
-              <div class="demo-review" id="demo-review" aria-live="polite">
-                <p class="demo-review-meta mono" id="demo-meta"></p>
-                <p class="demo-review-text" id="demo-text"></p>
-                <p class="demo-review-result mono" id="demo-result"></p>
-              </div>
-              <button class="btn btn-ghost btn-small" id="demo-next" data-i18n="demo.next">Clasificar otra reseña →</button>
-            </div>
-          </div>
-        </article>
-
-        <div class="filters reveal" role="group" aria-label="Filtrar proyectos" id="filters">
-          <button class="filter active" data-filter="all" data-i18n="filter.all">Todos</button>
-          <button class="filter" data-filter="backend">Backend</button>
-          <button class="filter" data-filter="gamedev">Game Dev</button>
-          <button class="filter" data-filter="ai" data-i18n="filter.ai">IA y automatización</button>
-          <button class="filter" data-filter="frontend">Frontend</button>
-        </div>
-        <div class="cards" id="cards"></div>
+        <div class="catalog" id="catalog"></div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="section section-alt" id="skills">
+    <!-- ABOUT + STACK -->
+    <section class="section section-alt" id="about">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow mono">04 · <span data-i18n="nav.skills">Stack</span></p>
-          <h2 data-i18n="skills.title">Con qué trabajo</h2>
+        <header class="section-head">
+          <h2 data-i18n="about.title">Sobre mí</h2>
+        </header>
+        <div class="about">
+          <div class="about-text">
+            <p data-i18n="about.p1"></p>
+            <p data-i18n="about.p2"></p>
+            <p data-i18n="about.p3"></p>
+          </div>
+          <aside class="about-card">
+            <img src="assets/foto-perfil.jpg" alt="Foto de Camila Términe" width="160" height="160" loading="lazy">
+            <dl class="facts" id="facts"></dl>
+          </aside>
         </div>
-        <div class="skills" id="skills-grid"></div>
 
-        <div class="edu reveal">
-          <h3 data-i18n="edu.title">Formación</h3>
-          <ul class="edu-list" id="edu-list"></ul>
+        <div class="about-cols">
+          <div>
+            <h3 data-i18n="skills.title">Stack</h3>
+            <dl class="skills" id="skills"></dl>
+          </div>
+          <div>
+            <h3 data-i18n="edu.title">Formación</h3>
+            <ul class="edu" id="edu"></ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section class="section contact" id="contact">
-      <div class="container contact-inner reveal">
-        <p class="eyebrow mono">05 · <span data-i18n="nav.contact">Contacto</span></p>
+      <div class="container">
         <h2 data-i18n="contact.title">¿Hablamos?</h2>
-        <p class="contact-lead" data-i18n="contact.lead">Busco roles de Backend Java, Unity/C# o integración de IA. Respondo en español o en inglés.</p>
+        <p class="section-lead" data-i18n="contact.lead">Busco roles de backend Java o Kotlin, o de integración de GenAI. Respondo en español o en inglés.</p>
         <div class="contact-email">
-          <a class="email-link mono" id="email-link" href="mailto:camila.termine@gmail.com">camila.termine@gmail.com</a>
-          <button class="icon-btn copy-btn" id="copy-email" aria-label="Copiar email">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <span class="copied mono" id="copied" role="status" data-i18n="contact.copied">¡Copiado!</span>
+          <a class="email-link" id="email-link" href="mailto:camila.termine@gmail.com">camila.termine@gmail.com</a>
+          <button class="btn btn-ghost btn-small" id="copy-email" data-i18n="contact.copy">Copiar email</button>
+          <span class="copied" id="copied" role="status"></span>
         </div>
         <ul class="socials">
-          <li><a href="https://www.linkedin.com/in/camila-termine" target="_blank" rel="noopener" class="social">LinkedIn ↗</a></li>
-          <li><a href="https://github.com/camitermine" target="_blank" rel="noopener" class="social">GitHub ↗</a></li>
-          <li><a href="https://www.imdb.com/es/name/nm16454992/" target="_blank" rel="noopener" class="social">IMDb ↗</a></li>
-          <li><a href="cv-es.pdf" download data-cv class="social" data-i18n="contact.cv">CV (PDF) ↓</a></li>
+          <li><a href="https://www.linkedin.com/in/camila-termine" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/camitermine" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.imdb.com/es/name/nm16454992/" target="_blank" rel="noopener">IMDb</a></li>
+          <li><a href="cv-es.pdf" download data-cv data-i18n="contact.cv">CV en PDF</a></li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p class="mono">© <span id="year"></span> Camila Términe · <span data-i18n="footer.built">Hecho a mano con HTML, CSS y JS</span></p>
-    <a href="#top" class="mono back-top" data-i18n="footer.top">Volver arriba ↑</a>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Camila Términe</p>
+      <p data-i18n="footer.built">Hecho a mano con HTML, CSS y JavaScript.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>

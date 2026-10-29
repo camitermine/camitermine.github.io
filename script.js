@@ -8,273 +8,404 @@ const DATA = {
   es: {
     ui: {
       'skip': 'Saltar al contenido',
-      'nav.about': 'Sobre mí', 'nav.experience': 'Experiencia', 'nav.projects': 'Proyectos',
-      'nav.skills': 'Stack', 'nav.contact': 'Contacto', 'nav.cv': 'Descargar CV',
-      'hero.status': 'Abierta a nuevas oportunidades · Remoto o Buenos Aires',
-      'hero.hello': 'Hola, soy',
-      'hero.lead': 'Construyo backends en Java que usan miles de personas, sistemas multiplayer en C# para un juego publicado en Steam, y herramientas que usan IA para resolver problemas reales.',
-      'hero.cta.projects': 'Ver proyectos', 'hero.cta.contact': 'Contactarme',
-      'stats.years': 'años desarrollando software en producción',
-      'stats.users': 'usuarios en el sistema de RRHH de CONICET',
-      'stats.desync': 'bugs de desincronización en Goblin Cleanup',
-      'stats.reviews': 'reseñas de Steam clasificadas con IA',
-      'about.title': 'Entre el backend, los videojuegos y la IA',
-      'about.p1': 'Soy Software Engineer en Buenos Aires. Hoy trabajo en <strong>Crisalu Games</strong> en <strong>Goblin Cleanup</strong>, un juego cooperativo para hasta 4 jugadores publicado por <strong>Team17</strong> en Steam. Ahí diseño sistemas de gameplay de punta a punta: el guardado de partidas, los emotes, el modo foto y la sincronización multiplayer.',
-      'about.p2': 'Antes desarrollé en Java/Spring Boot para <strong>SIGERH</strong>, el sistema de recursos humanos de CONICET que usan más de 30.000 personas en todo el país. Esa base en POO, clean code y arquitecturas mantenibles es la que hoy aplico al diseño de sistemas de juego.',
-      'about.p3': 'Y antes de programar pasé más de 10 años en <strong>CONICET Documental</strong>, gestionando más de 300 TB de material audiovisual para más de 35 documentales. Tengo crédito en IMDb por la postproducción de <em>Maelstrom: 2001</em>. De ahí viene mi obsesión por no perder datos.',
-      'about.p4': 'Uso IA como parte de mi forma de trabajar: agentes con Claude Code y MCP para revisar código, y la API de Claude para construir herramientas como Steam Review Insights.',
-      'facts.location': 'ubicación', 'facts.now': 'ahora', 'facts.study': 'estudio',
-      'facts.studyv': 'Tec. Univ. en Programación · UNSAM (2027)',
-      'facts.langs': 'idiomas', 'facts.langsv': 'Español nativo · Inglés B2', 'facts.method': 'método',
-      'exp.title': 'Dónde trabajé y qué logré',
-      'proj.title': 'Cosas que construí', 'proj.featured': '★ Proyecto destacado', 'proj.code': 'Ver código',
-      'sri.desc': 'API REST que importa las reseñas de Goblin Cleanup desde Steam y las clasifica con Claude en bugs, pedidos de mejora y comentarios positivos. Cada lunes, un flujo de n8n manda a Discord un resumen de la semana escrito por IA, con las reseñas destacadas y su link a Steam.',
-      'sri.p1': '449 bugs y 344 pedidos de mejora detectados en 24 idiomas, por menos de USD 1',
-      'sri.p2': '20 reseñas por llamada con structured outputs: ~USD 0,005 por lote',
-      'sri.p3': 'PostgreSQL + Flyway, Docker Compose, 25 tests con Testcontainers y CI',
-      'demo.hint': '↓ Probá el clasificador con reseñas reales',
-      'demo.next': 'Clasificar otra reseña →',
+      'nav.ai': 'GenAI', 'nav.experience': 'Experiencia', 'nav.projects': 'Proyectos',
+      'nav.about': 'Sobre mí', 'nav.contact': 'Contacto', 'nav.cv': 'Descargar CV',
+      'hero.role': 'Backend Software Engineer. Java, Spring Boot, Kotlin y GenAI.',
+      'hero.lead': 'Desarrollo backends y sistemas cliente-servidor: módulos Java para un sistema de RRHH con más de 30.000 usuarios, y la persistencia y sincronización de un juego multiplayer publicado por Team17 en Steam. Uso GenAI en todo el ciclo de desarrollo, siempre con revisión humana.',
+      'hero.cta.ai': 'Ver qué construí con IA', 'hero.cta.cv': 'Descargar CV',
+      'career.caption': 'Antes de programar pasé once años cuidando el archivo audiovisual de CONICET. Desde 2024 escribo el software que guarda y sincroniza datos.',
+      'ai.title': 'Cómo uso GenAI',
+      'ai.lead': 'La uso para construir producto y para desarrollar. En los dos casos dejo registro de qué hizo el modelo y qué corregí yo.',
+      'sri.sub': 'API REST en Spring Boot que clasifica feedback de jugadores con Claude',
+      'sri.desc': 'Importa las 2.367 reseñas de Goblin Cleanup desde la API pública de Steam y las clasifica con Claude Haiku 4.5 en bugs, pedidos de mejora, comentarios positivos y otros, en 24 idiomas. Cada lunes, un flujo de n8n publica en Discord un resumen con los bugs y pedidos nuevos.',
+      'sri.p1': '449 reportes de bugs y 344 pedidos de mejora detectados, por menos de USD 1 en total.',
+      'sri.p2': '20 reseñas por llamada con structured outputs, y procesamiento por lotes que se retoma sin pérdidas si la API falla.',
+      'sri.p3': 'PostgreSQL con migraciones Flyway, Docker Compose, tests con JUnit, Mockito y Testcontainers, y CI en GitHub Actions.',
+      'ttf.sub': 'Desarrollo asistido por IA, documentado como experimento',
+      'ttf.desc': 'Un tateti táctico multiplayer en Unity 6 donde cada jugador tiene como máximo tres fichas. Lo construyo de forma iterativa con Claude Code y el MCP de Unity, bajo mi supervisión. Cada iteración queda registrada: qué le pedí a la IA, qué produjo y qué tuve que corregir.',
+      'ttf.p1': 'Las reglas viven en un módulo de dominio en C# puro, sin dependencias del motor, con 33 tests unitarios y reutilizable en el modo local, el online y un futuro oponente con IA.',
+      'ttf.p2': 'Decisiones de arquitectura registradas en ADRs, e instrucciones del agente versionadas en el repo (CLAUDE.md).',
+      'ai.agents.title': 'Agentes de revisión en Crisalu Games',
+      'ai.agents.desc': 'Integré Claude Code con Unity mediante Model Context Protocol y creé agentes y skills propios que auditan el código antes de cada pull request, para detectar bugs y acelerar los refactors.',
+      'link.code': 'Ver código en GitHub',
+      'demo.next': 'Clasificar otra reseña real',
       'demo.thinking': 'Claude Haiku 4.5 clasificando',
-      'demo.result': 'Resultado:',
-      'filter.all': 'Todos', 'filter.ai': 'IA y automatización',
-      'skills.title': 'Con qué trabajo', 'edu.title': 'Formación',
+      'demo.result': 'Categoría:',
+      'log.entry': 'Entrada', 'log.of': 'de',
+      'exp.title': 'Experiencia',
+      'proj.title': 'Otros proyectos',
+      'proj.lead': 'Trabajo profesional y de la facultad, ordenado como un catálogo. Filtrá por área.',
+      'filter.all': 'Todos', 'filter.ai': 'IA',
+      'about.title': 'Sobre mí',
+      'about.p1': 'Soy Software Engineer en Buenos Aires, con foco en backend y sistemas cliente-servidor. En <strong>CONICET</strong> desarrollé módulos en Java y Spring Boot para SIGERH: optimicé consultas sobre un esquema MySQL de más de 300 tablas, trabajé con integraciones a sistemas externos y resolví incidencias de producción todas las semanas.',
+      'about.p2': 'Hoy, en <strong>Crisalu Games</strong>, diseño la sincronización de estado y la persistencia de <strong>Goblin Cleanup</strong>, un juego cooperativo publicado por Team17 en Steam, y mantengo la comunicación técnica en inglés con el publisher.',
+      'about.p3': 'Antes de programar pasé más de diez años en <strong>CONICET Documental</strong> gestionando el archivo de más de 35 documentales, y tengo crédito en IMDb por la postproducción de <em>Maelstrom: 2001</em>. De ahí viene mi obsesión por no perder datos y por documentar lo que construyo.',
+      'skills.title': 'Stack', 'edu.title': 'Formación', 'edu.cert': 'Ver certificado',
       'contact.title': '¿Hablamos?',
-      'contact.lead': 'Busco roles de Game Development (Unity/C#), Backend Java o integración de IA. Respondo en español o en inglés.',
-      'contact.copied': '¡Copiado!', 'contact.cv': 'CV (PDF) ↓',
-      'footer.built': 'Hecho a mano con HTML, CSS y JS', 'footer.top': 'Volver arriba ↑',
-      'card.code': 'Ver código ↗', 'card.steam': 'Ver en Steam ↗', 'card.video': 'Video del sistema funcionando en el juego',
+      'contact.lead': 'Busco roles de backend Java o Kotlin, o de integración de GenAI. Respondo en español o en inglés.',
+      'contact.copy': 'Copiar email', 'contact.copied': 'Email copiado', 'contact.cv': 'CV en PDF',
+      'footer.built': 'Hecho a mano con HTML, CSS y JavaScript.',
+      'card.code': 'Código', 'card.steam': 'Goblin Cleanup en Steam', 'card.video': 'Video del sistema funcionando en el juego',
+      'media.play': 'Reproducir video', 'media.pause': 'Pausar video',
+      'game.cpu': 'Contra la máquina', 'game.pvp': 'Dos jugadores', 'game.reset': 'Nueva partida',
+      'game.rule': 'Cada jugador tiene como máximo tres fichas. Al poner la cuarta, desaparece la más vieja.',
+      'game.you': 'Te toca: X', 'game.thinking': 'La máquina piensa…', 'game.turn': 'Turno de {p}',
+      'game.youWin': 'Ganaste. ¿Otra?', 'game.cpuWins': 'Ganó la máquina.', 'game.wins': 'Ganó {p}.',
+      'game.cell': 'Fila {r}, columna {c}', 'game.empty': 'vacía', 'game.fades': 'se desvanece en la próxima jugada',
     },
-    roles: ['Software Engineer', 'Unity / C# Developer', 'Backend Java Developer', 'AI Automation'],
+    career: {
+      today: 'hoy',
+      notes: [
+        { kind: 'archive', when: '2013 – 2024', what: 'Data manager y postproducción, CONICET Documental', fact: 'Más de 300 TB de material respaldado durante diez años, sin pérdida de datos, para más de 35 documentales.' },
+        { kind: 'backend', when: '2024 – 2025', what: 'Backend Java, CONICET (SIGERH)', fact: 'Módulos en Spring Boot para el sistema nacional de RRHH, con más de 30.000 usuarios.' },
+        { kind: 'games', when: '2025 – hoy', what: 'Software Engineer, Crisalu Games', fact: 'Sincronización cliente-servidor y persistencia de Goblin Cleanup: 70% menos bugs de desincronización.' },
+      ],
+    },
+    log: [
+      {
+        n: 1, title: 'Verificación de la extracción del Core', date: '22 de septiembre de 2026',
+        fields: [
+          ['Pedido', 'Retomar la rama de extracción del Core y verificar que compila y que los tests pasan antes de seguir.'],
+          ['Qué hizo la IA', 'Corrió los 33 tests por MCP y encontró una falla. Reprodujo la secuencia de jugadas fuera del test runner y aisló la causa: las fichas de relleno de O formaban una línea ganadora y la partida terminaba antes de tiempo. El bug estaba en los datos del test, no en el motor de reglas.'],
+          ['Revisión humana', 'Sobre el plan pedí una clave de posición exacta en vez de un hash, tests de inmutabilidad y de orden de eventos, y commitear antes de regenerar la escena.'],
+          ['Verificación', '33 de 33 tests pasan, sin errores de compilación.'],
+        ],
+      },
+      {
+        n: 2, title: 'Un helper contra secuencias contaminadas', date: '22 de septiembre de 2026',
+        fields: [
+          ['Pedido', 'Un helper que falle si una jugada de armado es rechazada o termina la partida antes de lo previsto. Restricción: no cambiar reglas ni aserciones que hoy pasan.'],
+          ['Qué hizo la IA', 'Creó MoveSequence.Apply y lo aplicó en 8 tests. Lo intentó en un noveno, notó que borraba 6 aserciones existentes y lo revirtió.'],
+          ['Aprendizaje', 'Un test que arma un escenario jugada por jugada tiene que verificar primero su propia premisa, para fallar donde está el error y no más adelante.'],
+        ],
+      },
+      {
+        n: 5, title: 'HUD: una hipótesis descartada con evidencia', date: '22 de septiembre de 2026',
+        fields: [
+          ['Pedido', 'Los textos del HUD se superponían. Mi hipótesis era que el generador de escena duplicaba objetos, y pedí verificarla por MCP antes de tocar nada.'],
+          ['Qué hizo la IA', 'Inspeccionó la jerarquía y el YAML de la escena: no había duplicados. La causa era que el aviso y el contador compartían un mismo texto. Al probar en el Simulator encontró dos bugs de layout anidado y los midió con GetWorldCorners en vez de a ojo.'],
+          ['Revisión humana', 'Aprobé el plan con cuatro ajustes, entre ellos que el bloqueo en vertical no fuera opcional porque lo exige el documento de diseño.'],
+        ],
+      },
+    ],
     jobs: [
       {
-        role: 'Software Engineer (C# / Unity)', company: 'Crisalu Games', date: 'Ago 2025 – Actualidad · Remoto',
-        context: 'Goblin Cleanup: juego cooperativo para hasta 4 jugadores, publicado por Team17 en Steam (Early Access). Empecé part-time en paralelo con CONICET y pasé a full-time.',
+        role: 'Software Engineer (C# / Unity)', company: 'Crisalu Games', when: 'Ago 2025 – hoy', where: 'Remoto',
+        context: 'Goblin Cleanup: juego multiplayer cooperativo para hasta 4 jugadores, publicado por Team17 en Steam. Empecé part-time en paralelo con CONICET y pasé a full-time.',
         points: [
-          'Diseñé desde cero el sistema de guardado y restauración de partidas multiplayer (serialización, checkpoints y reconstrucción de entidades con estado autoritativo del host), compatible entre versiones del juego.',
-          'Reduje en un <strong>70%</strong> los bugs de desincronización reportados, resolviendo alrededor de <strong>50 incidencias</strong> de race conditions y lógica cliente-servidor en tiempo real.',
-          'Desarrollé el sistema de emotes sincronizado en multiplayer y el modo foto in-game, con control de cámara, filtros y UI propia.',
-          'Implementé la navegación por teclado y gamepad en todos los menús con UI Toolkit, con compatibilidad total con Steam Deck y soporte multirresolución, y el sistema de logros con Steamworks SDK.',
-          'Integré Claude Code con Unity mediante MCP y creé agentes propios que auditan el código antes de cada pull request.',
-          'Resolví más de <strong>300 tickets</strong> en Jira trabajando con Scrum y Kanban, en comunicación diaria en inglés con Team17.',
+          'Diseñé desde cero el sistema de guardado y restauración de partidas multiplayer: serialización, checkpoints y reconstrucción de entidades a partir del estado autoritativo del host, compatible entre versiones del juego.',
+          'Reduje un <strong>70%</strong> los bugs de desincronización reportados (alrededor de 50 incidencias) diagnosticando race conditions y corrigiendo la sincronización de estado cliente-servidor en tiempo real.',
+          'Integré Claude Code con Unity mediante MCP y creé agentes y skills propios que auditan el código antes de cada pull request.',
+          'Desarrollé features multiplayer sincronizadas (emotes, modo foto), la navegación por teclado y gamepad en todos los menús con UI Toolkit, compatible con Steam Deck, y el sistema de logros con Steamworks SDK.',
+          'Resolví más de <strong>300 tickets</strong> en Jira con Scrum y Kanban, mantuve la comunicación técnica en inglés con Team17 y acompañé la incorporación de un nuevo integrante del equipo.',
         ],
-        tags: ['Unity', 'C#', 'FishNet', 'Steamworks', 'UI Toolkit', 'Cinemachine', 'MCP'],
+        stack: 'C#, Unity, FishNet, Steamworks SDK, UI Toolkit, Claude Code, MCP',
       },
       {
-        role: 'Backend Developer Java', company: 'CONICET · SIGERH', date: 'Sep 2024 – Oct 2025 · Buenos Aires',
-        context: 'Sistema de recursos humanos de alcance nacional, con más de 30.000 usuarios.',
+        role: 'Backend Developer Java', company: 'CONICET', when: 'Sep 2024 – Oct 2025', where: 'Buenos Aires',
+        context: 'SIGERH: sistema de recursos humanos de alcance nacional, con más de 30.000 usuarios.',
         points: [
-          'Desarrollé el módulo de certificación horaria: búsqueda por CUIL de las fichadas de cada agente y reporte mensual en PDF con JasperReports (entradas, salidas y diferencia de horas).',
-          'Desarrollé el módulo de cambio de cuenta bancaria: bandeja de aprobación para administradores, ABM de entidades bancarias y todas las validaciones del formulario.',
-          'Implementé la validación de CBU con el algoritmo de dígitos verificadores, que comprueba si la cuenta corresponde al banco elegido.',
-          'Optimicé las consultas de filtros de trámites sobre un esquema MySQL de más de <strong>300 tablas</strong> y resolví entre 6 y 7 incidencias de producción por semana.',
+          'Desarrollé el módulo de certificación horaria: búsqueda por CUIL de las fichadas de cada agente y reporte mensual en PDF con JasperReports con entradas, salidas y diferencia de horas.',
+          'Desarrollé parte del módulo de cambio de cuenta bancaria: bandeja de trámites con aprobación restringida a administradores y validación de CBU con el algoritmo de dígitos verificadores.',
+          'Optimicé las consultas SQL de los filtros de trámites sobre un esquema MySQL de más de <strong>300 tablas</strong>, mejorando sus tiempos de respuesta, y resolví entre 6 y 7 incidencias de producción por semana.',
+          'Trabajé con integraciones a sistemas externos, como el servicio de notificaciones y el SINE.',
+          'Trabajé con pull requests y code review entre pares, desplegué en los ambientes de desarrollo y testing con jobs de Jenkins, y documenté los módulos nuevos.',
         ],
-        tags: ['Java', 'Spring Boot', 'Hibernate', 'Struts 2', 'MySQL', 'JasperReports', 'Jenkins'],
+        stack: 'Java, Spring Boot, Hibernate, Struts 2, MySQL, JasperReports, Jenkins',
       },
       {
-        role: 'Data Manager y Asistente de Postproducción', company: 'CONICET Documental', date: 'Ago 2013 – Ago 2024 · Buenos Aires',
+        role: 'Data Manager y Asistente de Postproducción', company: 'CONICET Documental', when: 'Ago 2013 – Ago 2024', where: 'Buenos Aires',
         context: 'Productora audiovisual de CONICET: documentales científicos para TV Pública, Paka Paka y Encuentro.',
         points: [
-          'Gestioné el respaldo de más de <strong>300 TB</strong> de material en bruto, sin pérdida de datos en más de 10 años.',
-          'Catalogué el material y lo seleccioné para el equipo de edición de más de <strong>35 documentales</strong>.',
-          'Preparé guiones y transcripciones para los canales, y adapté subtítulos para personas sordas e hipoacúsicas para los vuelos de Aerolíneas Argentinas.',
-          'Mantuve el sitio web de la productora en WordPress y produje piezas para redes con Premiere Pro. Crédito en IMDb: <em>Maelstrom: 2001</em>.',
+          'Gestioné el respaldo y la organización de más de <strong>300 TB</strong> de material audiovisual durante más de 10 años, sin pérdida de datos, y catalogué el material para más de <strong>35 documentales</strong>.',
+          'Mantuve el sitio web de la productora en WordPress y preparé transcripciones y subtítulos accesibles para su emisión en vuelos de Aerolíneas Argentinas. Crédito en IMDb: <em>Maelstrom: 2001</em>.',
         ],
-        tags: ['Gestión de datos', 'Backups', 'WordPress', 'Premiere Pro'],
+        stack: 'Gestión de datos, backups, WordPress, Premiere Pro',
       },
     ],
     projects: [
       {
-        name: 'Goblin Cleanup · Emote System', kind: 'Game Dev · Crisalu Games', cats: ['gamedev'],
-        desc: 'Sistema completo de emotes: bailes y gestos que los jugadores disparan en partida, sincronizados en multiplayer e integrados con los animation controllers del juego.',
-        tags: ['Unity', 'C#', 'FishNet'], video: 'assets/videos/emotes.mp4', steam: true,
+        name: 'Pasaporte BA', origin: 'Bases de Datos, UNSAM (grupal)', tab: 'Backend', cats: ['backend'],
+        desc: 'App mobile de check-ins en bares, cafés, espacios culturales y murales de Buenos Aires. El backend en FastAPI tiene persistencia intercambiable con los patrones Repository y Factory: la misma API funciona sobre MySQL o HBase según un header de cada request.',
+        stack: 'Python, FastAPI, MySQL, HBase, React Native (Expo), Docker Compose',
+        code: 'https://github.com/camitermine/Pasaporte-BA',
       },
       {
-        name: 'Goblin Cleanup · Snapshot Mode', kind: 'Game Dev · Crisalu Games', cats: ['gamedev'],
-        desc: 'Modo foto in-game para capturar y compartir momentos de la partida: control de cámara, encuadre, filtros, efectos visuales y UI dedicada.',
-        tags: ['Unity', 'C#', 'Cinemachine'], video: 'assets/videos/snapshot.mp4', steam: true,
+        name: 'MercadoLite y MercadoLite Envíos', origin: 'UNSAM (grupal)', tab: 'Frontend y backend', cats: ['frontend', 'backend'],
+        desc: 'Un marketplace en React y TypeScript sobre un framework MVVM, con búsqueda, filtros, paginación y pedidos con estados. Y un sistema de envíos con API REST propia en Kotlin, dashboard de KPIs y ABM de transportistas: cada pedido del marketplace genera un envío a través de la API.',
+        stack: 'React, TypeScript, Kotlin, APIs REST, GitHub Actions',
       },
       {
-        name: 'Goblin Cleanup · Save System', kind: 'Game Dev · Crisalu Games', cats: ['gamedev', 'backend'],
-        desc: 'Sistema de guardado diseñado desde cero: persistencia del estado de los objetos, restauración dinámica de niveles y compatibilidad entre versiones, en singleplayer y multiplayer.',
-        tags: ['Unity', 'C#', 'FishNet', 'Serialización'], steam: true,
+        name: 'Goblin Cleanup: sistema de guardado', origin: 'Crisalu Games', tab: 'Backend', cats: ['backend', 'gamedev'],
+        desc: 'Guardado y restauración de partidas multiplayer diseñado desde cero: serialización, checkpoints y reconstrucción de entidades a partir del estado autoritativo del host, compatible entre versiones del juego.',
+        stack: 'C#, Unity, FishNet', steam: true,
       },
       {
-        name: 'CodeBricks · Arkanoid en Assembly', kind: 'Proyecto universitario', cats: ['gamedev'],
-        desc: 'Juego estilo Arkanoid escrito íntegramente en Assembly 8086, sin motor ni librerías: renderizado, input y lógica implementados a bajo nivel.',
-        tags: ['Assembly 8086', 'TASM', 'DOSBox'], video: 'assets/videos/arkanoid.mp4', code: 'https://github.com/camitermine/TP-Final-SPD',
+        name: 'Xpace', origin: 'Algoritmos II, UNSAM (grupal)', tab: 'Backend', cats: ['backend'],
+        desc: 'Gestión de expediciones espaciales con modelado orientado a objetos, patrones Strategy, Observer y Command, máquina de estados de misiones y reglas de validación de dominio. Tests con cobertura medida, CI y GitFlow con pull requests revisados.',
+        stack: 'Kotlin, Gradle, GitHub Actions',
+        code: 'https://github.com/camitermine/xpace',
       },
       {
-        name: 'Red neuronal desde cero', kind: 'Proyecto universitario', cats: ['ai'],
-        desc: 'Red neuronal que clasifica comportamiento de jugadores en juegos online, construida y entrenada sin frameworks de ML: álgebra lineal y backpropagation implementados a mano.',
-        tags: ['Python', 'NumPy'], code: 'https://github.com/camitermine/TpRedesNeuronales',
+        name: 'Red neuronal desde cero', origin: 'Inteligencia Artificial, UNSAM', tab: 'IA', cats: ['ai'],
+        desc: 'Clasificación del comportamiento de jugadores en juegos online, sin frameworks de ML: álgebra lineal y backpropagation implementados a mano.',
+        stack: 'Python, NumPy',
+        code: 'https://github.com/camitermine/TpRedesNeuronales',
       },
       {
-        name: 'Bots de automatización', kind: 'Proyecto universitario', cats: ['ai'],
-        desc: 'Dos flujos en n8n: un bot de WhatsApp que responde preguntas frecuentes y envía las consultas por email, y un envío automático de newsletters a Discord.',
-        tags: ['n8n', 'Webhooks', 'APIs REST'],
+        name: 'Bots con n8n', origin: 'Proyecto personal', tab: 'IA', cats: ['ai'],
+        desc: 'Un bot de WhatsApp que responde preguntas frecuentes y deriva las consultas por email, y un envío automático de newsletters a Discord.',
+        stack: 'n8n, webhooks, APIs REST',
       },
       {
-        name: 'MercadoLite', kind: 'Proyecto universitario', cats: ['frontend'],
-        desc: 'E-commerce fullstack con arquitectura MVC, componentes React reutilizables y tipado estricto, que consume una API REST de forma asíncrona.',
-        tags: ['TypeScript', 'React'],
+        name: 'Goblin Cleanup: emotes', origin: 'Crisalu Games', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'Bailes y gestos que los jugadores disparan en partida, sincronizados en multiplayer e integrados con los animation controllers del juego.',
+        stack: 'C#, Unity, FishNet', video: 'assets/videos/emotes.mp4', steam: true,
       },
       {
-        name: 'XSpace', kind: 'Proyecto universitario', cats: ['backend'],
-        desc: 'Sistema de asignación de recursos y misiones espaciales modelado con patrones de diseño y validado con tests automatizados en CI.',
-        tags: ['Kotlin', 'POO', 'GitHub Actions'],
+        name: 'Goblin Cleanup: modo foto', origin: 'Crisalu Games', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'Modo foto in-game para capturar momentos de la partida, con control de cámara, encuadre, filtros y una UI propia.',
+        stack: 'C#, Unity, Cinemachine', video: 'assets/videos/snapshot.mp4', steam: true,
       },
+      {
+        name: 'Arkanoid en Assembly 8086', origin: 'UNSAM', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'Renderizado, input y lógica de juego a bajo nivel, sin motor ni librerías.',
+        stack: 'Assembly 8086, TASM, DOSBox', video: 'assets/videos/arkanoid.mp4',
+        code: 'https://github.com/camitermine/TP-Final-SPD',
+      },
+    ],
+    facts: [
+      ['Ubicación', 'Buenos Aires, Argentina'],
+      ['Ahora', 'Crisalu Games'],
+      ['Estudio', 'Tecnicatura en Programación Informática, UNSAM'],
+      ['Idiomas', 'Español nativo, inglés B2'],
+      ['Trabajo con', 'Scrum, Kanban, code review'],
     ],
     skills: [
-      { icon: '🎮', name: 'Game Development', items: ['Unity', 'C#', 'FishNet (multiplayer)', 'Steamworks SDK', 'UI Toolkit', 'Input System', 'Cinemachine', 'Blender'] },
-      { icon: '⚙️', name: 'Backend', items: ['Java', 'Spring Boot', 'Hibernate / JPA', 'Struts 2', 'APIs REST', 'OpenAPI / Swagger', 'JasperReports'] },
-      { icon: '🗄️', name: 'Bases de datos', items: ['PostgreSQL', 'MySQL', 'Flyway', 'Optimización de SQL'] },
-      { icon: '🤖', name: 'IA y automatización', items: ['Claude API', 'Structured outputs', 'Claude Code', 'MCP', 'n8n', 'Python', 'NumPy', 'Pandas', 'Scikit-Learn'] },
-      { icon: '🧪', name: 'Testing y DevOps', items: ['JUnit', 'Mockito', 'Testcontainers', 'Docker', 'Docker Compose', 'GitHub Actions', 'Jenkins', 'Git'] },
-      { icon: '🎨', name: 'Frontend y diseño', items: ['React', 'TypeScript', 'JavaScript', 'HTML / CSS', 'Figma', 'Adobe XD', 'Premiere Pro'] },
+      ['Lenguajes', 'Java, Kotlin, TypeScript, JavaScript, Python, C#, SQL'],
+      ['Backend', 'Spring Boot, FastAPI, Hibernate, JPA, Struts 2, APIs REST, OpenAPI, JasperReports, arquitectura en capas'],
+      ['Bases de datos', 'PostgreSQL, MySQL, HBase, Flyway, modelado relacional y NoSQL, optimización de SQL'],
+      ['GenAI', 'Claude API (Anthropic Java SDK), structured outputs, Claude Code, MCP, agentes de revisión de código, prompt engineering, n8n'],
+      ['Frontend', 'React, TypeScript, React Native (Expo), HTML, CSS'],
+      ['Testing y DevOps', 'JUnit, Mockito, Testcontainers, GitHub Actions, Jenkins, Docker, Docker Compose, Git, Linux'],
+      ['Cliente-servidor', 'Unity, FishNet (host autoritativo), Steamworks SDK, serialización y persistencia de estado'],
+      ['Patrones', 'Repository, Factory, Strategy, Observer, Command, MVC, MVVM'],
     ],
     edu: [
-      { what: 'Tecnicatura Universitaria en Programación Informática', where: 'Universidad Nacional de San Martín (UNSAM)', when: '2022 – 2027 (egreso estimado)' },
-      { what: 'Java Empresarial y Spring Boot', where: 'Udemy', when: '2024 – 2025' },
-      { what: 'Full Stack Java', where: 'Agencia de Aprendizaje a lo largo de la Vida', when: '2023 · 6 meses' },
-      { what: 'React', where: 'Oracle', when: '2023' },
+      { what: 'Tecnicatura Universitaria en Programación Informática', where: 'UNSAM, 2022 – 2026. Bases de Datos, Programación Concurrente y Distribuida, Redes, Algoritmos I a III, Inteligencia Artificial.' },
+      { what: 'Universidad Java: de cero a experto', where: 'Udemy, 2025. 150 horas.', url: 'https://ude.my/UC-0a1b81f8-2baf-4191-90af-627ed2af4b3d' },
+      { what: 'Especialización en Unity', where: 'Codo a Codo 4.0, Gobierno de la Ciudad de Buenos Aires, 2022. 208 horas.' },
+      { what: 'Full Stack Java', where: 'Codo a Codo 4.0, Agencia de Aprendizaje a lo largo de la Vida, 2021. 198 horas.' },
+      { what: 'Oracle Next Education (ONE)', where: 'Oracle y Alura Latam, 2022 – 2023. Formaciones en programación, HTML y CSS, Front End y React.', url: 'https://app.aluracursos.com/user/cami-termine/degree-react-grupo4-one-15509/certificate' },
+      { what: 'Big data al servicio de una gestión pública eficaz', where: 'Instituto Nacional de la Administración Pública (INAP), 2024.' },
     ],
   },
 
   en: {
     ui: {
       'skip': 'Skip to content',
-      'nav.about': 'About', 'nav.experience': 'Experience', 'nav.projects': 'Projects',
-      'nav.skills': 'Stack', 'nav.contact': 'Contact', 'nav.cv': 'Download CV',
-      'hero.status': 'Open to new opportunities · Remote or Buenos Aires',
-      'hero.hello': "Hi, I'm",
-      'hero.lead': 'I build Java backends used by thousands of people, multiplayer systems in C# for a game published on Steam, and tools that use AI to solve real problems.',
-      'hero.cta.projects': 'See projects', 'hero.cta.contact': 'Get in touch',
-      'stats.years': 'years building software in production',
-      'stats.users': "users on CONICET's HR system",
-      'stats.desync': 'desync bugs in Goblin Cleanup',
-      'stats.reviews': 'Steam reviews classified with AI',
-      'about.title': 'Between backend, games and AI',
-      'about.p1': "I'm a Software Engineer based in Buenos Aires. I currently work at <strong>Crisalu Games</strong> on <strong>Goblin Cleanup</strong>, a co-op game for up to 4 players published by <strong>Team17</strong> on Steam. There I design gameplay systems end to end: game saving, emotes, photo mode and multiplayer synchronization.",
-      'about.p2': "Before that I built Java/Spring Boot features for <strong>SIGERH</strong>, CONICET's HR system used by more than 30,000 people across Argentina. That foundation in OOP, clean code and maintainable architecture is what I now apply to game systems.",
-      'about.p3': 'And before coding, I spent over 10 years at <strong>CONICET Documental</strong>, managing 300+ TB of footage for more than 35 documentaries. I have an IMDb credit for post-production on <em>Maelstrom: 2001</em>. That is where my obsession with never losing data comes from.',
-      'about.p4': 'AI is part of how I work: agents built with Claude Code and MCP to review code, and the Claude API to build tools like Steam Review Insights.',
-      'facts.location': 'location', 'facts.now': 'now', 'facts.study': 'studying',
-      'facts.studyv': 'Programming degree · UNSAM (2027)',
-      'facts.langs': 'languages', 'facts.langsv': 'Spanish (native) · English B2', 'facts.method': 'workflow',
-      'exp.title': 'Where I worked and what I achieved',
-      'proj.title': 'Things I built', 'proj.featured': '★ Featured project', 'proj.code': 'View code',
-      'sri.desc': 'REST API that imports Goblin Cleanup reviews from Steam and uses Claude to classify them into bugs, feature requests and praise. Every Monday, an n8n workflow posts an AI-written weekly summary to Discord, with the top reviews linked to Steam.',
-      'sri.p1': '449 bugs and 344 feature requests found across 24 languages, for less than USD 1',
-      'sri.p2': '20 reviews per request with structured outputs: ~USD 0.005 per batch',
-      'sri.p3': 'PostgreSQL + Flyway, Docker Compose, 25 tests with Testcontainers and CI',
-      'demo.hint': '↓ Try the classifier with real reviews',
-      'demo.next': 'Classify another review →',
+      'nav.ai': 'GenAI', 'nav.experience': 'Experience', 'nav.projects': 'Projects',
+      'nav.about': 'About', 'nav.contact': 'Contact', 'nav.cv': 'Download CV',
+      'hero.role': 'Backend Software Engineer. Java, Spring Boot, Kotlin and GenAI.',
+      'hero.lead': 'I build backends and client-server systems: Java modules for an HR system with more than 30,000 users, and the persistence and state sync of a multiplayer game published by Team17 on Steam. I use GenAI across the whole development cycle, always with human review.',
+      'hero.cta.ai': 'See what I built with AI', 'hero.cta.cv': 'Download CV',
+      'career.caption': 'Before coding, I spent eleven years looking after CONICET’s film archive. Since 2024 I write the software that saves and syncs data.',
+      'ai.title': 'How I use GenAI',
+      'ai.lead': 'I use it to build products and to write software. Either way, I keep a record of what the model did and what I corrected.',
+      'sri.sub': 'Spring Boot REST API that classifies player feedback with Claude',
+      'sri.desc': 'It imports all 2,367 Goblin Cleanup reviews from Steam’s public API and classifies them with Claude Haiku 4.5 into bugs, feature requests, praise and other, across 24 languages. Every Monday, an n8n workflow posts a summary of new bugs and requests to Discord.',
+      'sri.p1': '449 bug reports and 344 feature requests found, for less than USD 1 in total.',
+      'sri.p2': '20 reviews per request with structured outputs, and batch processing that resumes without data loss if the API fails.',
+      'sri.p3': 'PostgreSQL with Flyway migrations, Docker Compose, tests with JUnit, Mockito and Testcontainers, and CI on GitHub Actions.',
+      'ttf.sub': 'AI-assisted development, documented as an experiment',
+      'ttf.desc': 'A tactical multiplayer tic-tac-toe in Unity 6 where each player has at most three pieces. I build it iteratively with Claude Code and the Unity MCP, under my supervision. Every iteration is logged: what I asked the AI, what it produced and what I had to correct.',
+      'ttf.p1': 'The rules live in a pure C# domain module with no engine dependencies, covered by 33 unit tests and reused by local play, online play and a future AI opponent.',
+      'ttf.p2': 'Architecture decisions recorded as ADRs, and agent instructions versioned in the repo (CLAUDE.md).',
+      'ai.agents.title': 'Review agents at Crisalu Games',
+      'ai.agents.desc': 'I integrated Claude Code with Unity through the Model Context Protocol and built custom agents and skills that audit the code before every pull request, to catch bugs and speed up refactors.',
+      'link.code': 'View code on GitHub',
+      'demo.next': 'Classify another real review',
       'demo.thinking': 'Claude Haiku 4.5 is classifying',
-      'demo.result': 'Result:',
-      'filter.all': 'All', 'filter.ai': 'AI & automation',
-      'skills.title': 'What I work with', 'edu.title': 'Education',
-      'contact.title': "Let's talk",
-      'contact.lead': "I'm looking for Game Development (Unity/C#), Java Backend or AI integration roles. Happy to talk in English or Spanish.",
-      'contact.copied': 'Copied!', 'contact.cv': 'CV (PDF) ↓',
-      'footer.built': 'Handmade with HTML, CSS and JS', 'footer.top': 'Back to top ↑',
-      'card.code': 'View code ↗', 'card.steam': 'View on Steam ↗', 'card.video': 'Video of the system running in the game',
+      'demo.result': 'Category:',
+      'log.entry': 'Entry', 'log.of': 'of',
+      'exp.title': 'Experience',
+      'proj.title': 'More projects',
+      'proj.lead': 'Professional and university work, arranged like a catalog. Filter by area.',
+      'filter.all': 'All', 'filter.ai': 'AI',
+      'about.title': 'About me',
+      'about.p1': 'I’m a Software Engineer based in Buenos Aires, focused on backend and client-server systems. At <strong>CONICET</strong> I built Java and Spring Boot modules for SIGERH: I optimized queries on a MySQL schema of more than 300 tables, worked on integrations with external systems and fixed production incidents every week.',
+      'about.p2': 'Today, at <strong>Crisalu Games</strong>, I design the state sync and persistence of <strong>Goblin Cleanup</strong>, a co-op game published by Team17 on Steam, and handle technical communication in English with the publisher.',
+      'about.p3': 'Before coding, I spent more than ten years at <strong>CONICET Documental</strong> managing the archive for over 35 documentaries, and I have an IMDb credit for post-production on <em>Maelstrom: 2001</em>. That’s where my obsession with never losing data, and with documenting what I build, comes from.',
+      'skills.title': 'Stack', 'edu.title': 'Education', 'edu.cert': 'View certificate',
+      'contact.title': 'Let’s talk',
+      'contact.lead': 'I’m looking for Java or Kotlin backend roles, or GenAI integration work. Happy to talk in English or Spanish.',
+      'contact.copy': 'Copy email', 'contact.copied': 'Email copied', 'contact.cv': 'CV as PDF',
+      'footer.built': 'Handmade with HTML, CSS and JavaScript.',
+      'card.code': 'Code', 'card.steam': 'Goblin Cleanup on Steam', 'card.video': 'Video of the system running in the game',
+      'media.play': 'Play video', 'media.pause': 'Pause video',
+      'game.cpu': 'Vs computer', 'game.pvp': 'Two players', 'game.reset': 'New game',
+      'game.rule': 'Each player can have at most three pieces. Placing a fourth removes the oldest one.',
+      'game.you': 'Your turn: X', 'game.thinking': 'The computer is thinking…', 'game.turn': '{p} to move',
+      'game.youWin': 'You won. Another one?', 'game.cpuWins': 'The computer won.', 'game.wins': '{p} wins.',
+      'game.cell': 'Row {r}, column {c}', 'game.empty': 'empty', 'game.fades': 'fades on the next move',
     },
-    roles: ['Software Engineer', 'Unity / C# Developer', 'Java Backend Developer', 'AI Automation'],
+    career: {
+      today: 'now',
+      notes: [
+        { kind: 'archive', when: '2013 – 2024', what: 'Data manager and post-production, CONICET Documental', fact: 'Over 300 TB of footage backed up across ten years with zero data loss, for more than 35 documentaries.' },
+        { kind: 'backend', when: '2024 – 2025', what: 'Java backend, CONICET (SIGERH)', fact: 'Spring Boot modules for the national HR system, used by more than 30,000 people.' },
+        { kind: 'games', when: '2025 – now', what: 'Software Engineer, Crisalu Games', fact: 'Client-server sync and persistence for Goblin Cleanup: 70% fewer desync bugs.' },
+      ],
+    },
+    log: [
+      {
+        n: 1, title: 'Verifying the Core extraction', date: 'September 22, 2026',
+        fields: [
+          ['Request', 'Pick up the Core extraction branch and check that it compiles and the tests pass before moving on.'],
+          ['What the AI did', 'Ran the 33 tests through MCP and found one failure. It replayed the move sequence outside the test runner and isolated the cause: O’s filler pieces formed a winning line, so the game ended early. The bug was in the test data, not in the rules engine.'],
+          ['Human review', 'On the plan, I asked for an exact position key instead of a hash, tests for state immutability and event order, and a commit before regenerating the scene.'],
+          ['Verification', '33 of 33 tests pass, no compile errors.'],
+        ],
+      },
+      {
+        n: 2, title: 'A helper against contaminated sequences', date: 'September 22, 2026',
+        fields: [
+          ['Request', 'A helper that fails if a setup move is rejected or ends the game earlier than intended. Constraint: don’t change any rules or any assertion that passes today.'],
+          ['What the AI did', 'Created MoveSequence.Apply and used it in 8 tests. It tried a ninth, noticed it removed 6 existing assertions and reverted it.'],
+          ['Lesson', 'A test that builds a scenario move by move has to check its own premise first, so it fails where the mistake is and not further down.'],
+        ],
+      },
+      {
+        n: 5, title: 'HUD: a hypothesis ruled out with evidence', date: 'September 22, 2026',
+        fields: [
+          ['Request', 'HUD labels were overlapping. My hypothesis was that the scene builder duplicated objects, and I asked for it to be checked through MCP before touching anything.'],
+          ['What the AI did', 'Inspected the hierarchy and the scene YAML: there were no duplicates. The cause was that the warning and the counter shared one text field. While testing in the Simulator it found two nested-layout bugs and measured them with GetWorldCorners instead of by eye.'],
+          ['Human review', 'I approved the plan with four changes, including making the portrait lock mandatory, since the design document requires it.'],
+        ],
+      },
+    ],
     jobs: [
       {
-        role: 'Software Engineer (C# / Unity)', company: 'Crisalu Games', date: 'Aug 2025 – Present · Remote',
-        context: 'Goblin Cleanup: co-op game for up to 4 players, published by Team17 on Steam (Early Access). Started part-time alongside CONICET, then moved to full-time.',
+        role: 'Software Engineer (C# / Unity)', company: 'Crisalu Games', when: 'Aug 2025 – now', where: 'Remote',
+        context: 'Goblin Cleanup: co-op multiplayer game for up to 4 players, published by Team17 on Steam. Started part-time alongside CONICET, then moved to full-time.',
         points: [
-          'Designed from scratch the multiplayer save and restore system (serialization, checkpoints and entity rebuilding with host-authoritative state), compatible across game versions.',
-          'Cut reported desync bugs by <strong>70%</strong>, fixing around <strong>50 issues</strong> involving race conditions and real-time client-server logic.',
-          'Built the emote system, synchronized in multiplayer, and the in-game photo mode with camera controls, filters and its own UI.',
-          'Implemented keyboard and gamepad navigation across every menu with UI Toolkit, with full Steam Deck support and multi-resolution layouts, plus the achievements system with the Steamworks SDK.',
-          'Integrated Claude Code with Unity through MCP and built custom agents that audit the code before every pull request.',
-          'Resolved <strong>300+ tickets</strong> in Jira using Scrum and Kanban, communicating daily in English with Team17.',
+          'Designed the multiplayer save and restore system from scratch: serialization, checkpoints and entity rebuilding from the host’s authoritative state, compatible across game versions.',
+          'Cut reported desync bugs by <strong>70%</strong> (around 50 issues) by diagnosing race conditions and fixing real-time client-server state sync.',
+          'Integrated Claude Code with Unity through MCP and built custom agents and skills that audit the code before every pull request.',
+          'Built synchronized multiplayer features (emotes, photo mode), keyboard and gamepad navigation across every menu with UI Toolkit, with Steam Deck support, and the achievements system with the Steamworks SDK.',
+          'Resolved <strong>300+ tickets</strong> in Jira using Scrum and Kanban, handled technical communication in English with Team17 and onboarded a new team member.',
         ],
-        tags: ['Unity', 'C#', 'FishNet', 'Steamworks', 'UI Toolkit', 'Cinemachine', 'MCP'],
+        stack: 'C#, Unity, FishNet, Steamworks SDK, UI Toolkit, Claude Code, MCP',
       },
       {
-        role: 'Java Backend Developer', company: 'CONICET · SIGERH', date: 'Sep 2024 – Oct 2025 · Buenos Aires',
-        context: 'Nationwide HR system with more than 30,000 users.',
+        role: 'Java Backend Developer', company: 'CONICET', when: 'Sep 2024 – Oct 2025', where: 'Buenos Aires',
+        context: 'SIGERH: nationwide human resources system with more than 30,000 users.',
         points: [
-          "Built the working-hours certification module: search an employee's clock-in records by CUIL and generate a monthly PDF report with JasperReports (entries, exits and hour differences).",
-          'Built the bank account change module: approval queue for administrators, bank CRUD and all form validations.',
-          'Implemented CBU (Argentine bank account number) validation using its check-digit algorithm, verifying that the account belongs to the selected bank.',
-          'Optimized the SQL behind the request filters on a MySQL schema of <strong>300+ tables</strong>, and fixed 6–7 production incidents per week.',
+          'Built the working-hours certification module: search an employee’s clock-in records by CUIL and generate a monthly PDF report with JasperReports showing entries, exits and hour differences.',
+          'Built part of the bank account change module: a request queue with approval restricted to administrators, and CBU validation using its check-digit algorithm.',
+          'Optimized the SQL behind the request filters on a MySQL schema of <strong>300+ tables</strong>, improving response times, and fixed 6–7 production incidents per week.',
+          'Worked on integrations with external systems, such as the notification service and SINE.',
+          'Worked with pull requests and peer code review, deployed to development and testing environments with Jenkins jobs, and documented new modules.',
         ],
-        tags: ['Java', 'Spring Boot', 'Hibernate', 'Struts 2', 'MySQL', 'JasperReports', 'Jenkins'],
+        stack: 'Java, Spring Boot, Hibernate, Struts 2, MySQL, JasperReports, Jenkins',
       },
       {
-        role: 'Data Manager & Post-production Assistant', company: 'CONICET Documental', date: 'Aug 2013 – Aug 2024 · Buenos Aires',
-        context: "CONICET's production company: science documentaries for Argentina's public TV channels.",
+        role: 'Data Manager & Post-production Assistant', company: 'CONICET Documental', when: 'Aug 2013 – Aug 2024', where: 'Buenos Aires',
+        context: 'CONICET’s production company: science documentaries for Argentina’s public TV channels.',
         points: [
-          'Managed backups for <strong>300+ TB</strong> of raw footage, with zero data loss in over 10 years.',
-          'Catalogued footage and selected material for the editors of <strong>35+ documentaries</strong>.',
-          "Prepared scripts and transcripts for broadcasters, and adapted closed captions for deaf and hard-of-hearing viewers on Aerolíneas Argentinas' flights.",
-          'Maintained the company website on WordPress and produced social media pieces with Premiere Pro. IMDb credit: <em>Maelstrom: 2001</em>.',
+          'Managed backups and organization for <strong>300+ TB</strong> of footage over more than 10 years with zero data loss, and catalogued material for <strong>35+ documentaries</strong>.',
+          'Maintained the company website on WordPress and prepared transcripts and accessible captions for broadcast on Aerolíneas Argentinas flights. IMDb credit: <em>Maelstrom: 2001</em>.',
         ],
-        tags: ['Data management', 'Backups', 'WordPress', 'Premiere Pro'],
+        stack: 'Data management, backups, WordPress, Premiere Pro',
       },
     ],
     projects: [
       {
-        name: 'Goblin Cleanup · Emote System', kind: 'Game Dev · Crisalu Games', cats: ['gamedev'],
-        desc: 'Full emote system: dances and gestures players trigger in-game, synchronized in multiplayer and wired into the game’s animation controllers.',
-        tags: ['Unity', 'C#', 'FishNet'], video: 'assets/videos/emotes.mp4', steam: true,
+        name: 'Pasaporte BA', origin: 'Databases course, UNSAM (team)', tab: 'Backend', cats: ['backend'],
+        desc: 'Mobile app for checking in at bars, cafés, cultural venues and murals in Buenos Aires. The FastAPI backend has swappable persistence using the Repository and Factory patterns: the same API runs on MySQL or HBase depending on a request header.',
+        stack: 'Python, FastAPI, MySQL, HBase, React Native (Expo), Docker Compose',
+        code: 'https://github.com/camitermine/Pasaporte-BA',
       },
       {
-        name: 'Goblin Cleanup · Snapshot Mode', kind: 'Game Dev · Crisalu Games', cats: ['gamedev'],
-        desc: 'In-game photo mode to capture and share moments: camera control, framing, filters, visual effects and a dedicated UI.',
-        tags: ['Unity', 'C#', 'Cinemachine'], video: 'assets/videos/snapshot.mp4', steam: true,
+        name: 'MercadoLite and MercadoLite Envíos', origin: 'UNSAM (team)', tab: 'Frontend and backend', cats: ['frontend', 'backend'],
+        desc: 'A React and TypeScript marketplace on an MVVM framework, with search, filters, pagination and orders with states. Plus a shipping system with its own Kotlin REST API, a KPI dashboard and carrier management: every marketplace order creates a shipment through the API.',
+        stack: 'React, TypeScript, Kotlin, REST APIs, GitHub Actions',
       },
       {
-        name: 'Goblin Cleanup · Save System', kind: 'Game Dev · Crisalu Games', cats: ['gamedev', 'backend'],
-        desc: 'Save system designed from scratch: object state persistence, dynamic level restoration and cross-version compatibility, in single-player and multiplayer.',
-        tags: ['Unity', 'C#', 'FishNet', 'Serialization'], steam: true,
+        name: 'Goblin Cleanup: save system', origin: 'Crisalu Games', tab: 'Backend', cats: ['backend', 'gamedev'],
+        desc: 'Multiplayer save and restore designed from scratch: serialization, checkpoints and entity rebuilding from the host’s authoritative state, compatible across game versions.',
+        stack: 'C#, Unity, FishNet', steam: true,
       },
       {
-        name: 'CodeBricks · Arkanoid in Assembly', kind: 'University project', cats: ['gamedev'],
-        desc: 'Arkanoid-style game written entirely in 8086 Assembly, with no engine or libraries: rendering, input and game logic built at the lowest level.',
-        tags: ['8086 Assembly', 'TASM', 'DOSBox'], video: 'assets/videos/arkanoid.mp4', code: 'https://github.com/camitermine/TP-Final-SPD',
+        name: 'Xpace', origin: 'Algorithms II, UNSAM (team)', tab: 'Backend', cats: ['backend'],
+        desc: 'Space expedition management with object-oriented modeling, Strategy, Observer and Command patterns, a mission state machine and domain validation rules. Tests with measured coverage, CI and GitFlow with reviewed pull requests.',
+        stack: 'Kotlin, Gradle, GitHub Actions',
+        code: 'https://github.com/camitermine/xpace',
       },
       {
-        name: 'Neural network from scratch', kind: 'University project', cats: ['ai'],
-        desc: 'Neural network that classifies player behavior in online games, built and trained without ML frameworks: linear algebra and backpropagation implemented by hand.',
-        tags: ['Python', 'NumPy'], code: 'https://github.com/camitermine/TpRedesNeuronales',
+        name: 'Neural network from scratch', origin: 'Artificial Intelligence course, UNSAM', tab: 'AI', cats: ['ai'],
+        desc: 'Classifies player behavior in online games without ML frameworks: linear algebra and backpropagation implemented by hand.',
+        stack: 'Python, NumPy',
+        code: 'https://github.com/camitermine/TpRedesNeuronales',
       },
       {
-        name: 'Automation bots', kind: 'University project', cats: ['ai'],
-        desc: 'Two n8n workflows: a WhatsApp bot that answers FAQs and forwards questions by email, and an automated newsletter sent to Discord.',
-        tags: ['n8n', 'Webhooks', 'REST APIs'],
+        name: 'n8n bots', origin: 'Personal project', tab: 'AI', cats: ['ai'],
+        desc: 'A WhatsApp bot that answers FAQs and forwards questions by email, and an automated newsletter sent to Discord.',
+        stack: 'n8n, webhooks, REST APIs',
       },
       {
-        name: 'MercadoLite', kind: 'University project', cats: ['frontend'],
-        desc: 'Full-stack e-commerce app with a decoupled MVC architecture, reusable React components and strict typing, consuming a REST API asynchronously.',
-        tags: ['TypeScript', 'React'],
+        name: 'Goblin Cleanup: emotes', origin: 'Crisalu Games', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'Dances and gestures players trigger in-game, synchronized in multiplayer and wired into the game’s animation controllers.',
+        stack: 'C#, Unity, FishNet', video: 'assets/videos/emotes.mp4', steam: true,
       },
       {
-        name: 'XSpace', kind: 'University project', cats: ['backend'],
-        desc: 'Resource and space-mission allocation system modeled with design patterns and validated by automated tests in CI.',
-        tags: ['Kotlin', 'OOP', 'GitHub Actions'],
+        name: 'Goblin Cleanup: photo mode', origin: 'Crisalu Games', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'In-game photo mode to capture moments of a match, with camera control, framing, filters and its own UI.',
+        stack: 'C#, Unity, Cinemachine', video: 'assets/videos/snapshot.mp4', steam: true,
       },
+      {
+        name: 'Arkanoid in 8086 Assembly', origin: 'UNSAM', tab: 'Game dev', cats: ['gamedev'],
+        desc: 'Rendering, input and game logic at the lowest level, with no engine or libraries.',
+        stack: '8086 Assembly, TASM, DOSBox', video: 'assets/videos/arkanoid.mp4',
+        code: 'https://github.com/camitermine/TP-Final-SPD',
+      },
+    ],
+    facts: [
+      ['Location', 'Buenos Aires, Argentina'],
+      ['Now', 'Crisalu Games'],
+      ['Studying', 'Computer Programming degree, UNSAM'],
+      ['Languages', 'Spanish (native), English B2'],
+      ['Works with', 'Scrum, Kanban, code review'],
     ],
     skills: [
-      { icon: '🎮', name: 'Game Development', items: ['Unity', 'C#', 'FishNet (multiplayer)', 'Steamworks SDK', 'UI Toolkit', 'Input System', 'Cinemachine', 'Blender'] },
-      { icon: '⚙️', name: 'Backend', items: ['Java', 'Spring Boot', 'Hibernate / JPA', 'Struts 2', 'REST APIs', 'OpenAPI / Swagger', 'JasperReports'] },
-      { icon: '🗄️', name: 'Databases', items: ['PostgreSQL', 'MySQL', 'Flyway', 'SQL optimization'] },
-      { icon: '🤖', name: 'AI & automation', items: ['Claude API', 'Structured outputs', 'Claude Code', 'MCP', 'n8n', 'Python', 'NumPy', 'Pandas', 'Scikit-Learn'] },
-      { icon: '🧪', name: 'Testing & DevOps', items: ['JUnit', 'Mockito', 'Testcontainers', 'Docker', 'Docker Compose', 'GitHub Actions', 'Jenkins', 'Git'] },
-      { icon: '🎨', name: 'Frontend & design', items: ['React', 'TypeScript', 'JavaScript', 'HTML / CSS', 'Figma', 'Adobe XD', 'Premiere Pro'] },
+      ['Languages', 'Java, Kotlin, TypeScript, JavaScript, Python, C#, SQL'],
+      ['Backend', 'Spring Boot, FastAPI, Hibernate, JPA, Struts 2, REST APIs, OpenAPI, JasperReports, layered architecture'],
+      ['Databases', 'PostgreSQL, MySQL, HBase, Flyway, relational and NoSQL modeling, SQL optimization'],
+      ['GenAI', 'Claude API (Anthropic Java SDK), structured outputs, Claude Code, MCP, code review agents, prompt engineering, n8n'],
+      ['Frontend', 'React, TypeScript, React Native (Expo), HTML, CSS'],
+      ['Testing & DevOps', 'JUnit, Mockito, Testcontainers, GitHub Actions, Jenkins, Docker, Docker Compose, Git, Linux'],
+      ['Client-server', 'Unity, FishNet (host-authoritative), Steamworks SDK, state serialization and persistence'],
+      ['Patterns', 'Repository, Factory, Strategy, Observer, Command, MVC, MVVM'],
     ],
     edu: [
-      { what: 'University Degree in Computer Programming', where: 'Universidad Nacional de San Martín (UNSAM)', when: '2022 – 2027 (expected)' },
-      { what: 'Enterprise Java & Spring Boot', where: 'Udemy', when: '2024 – 2025' },
-      { what: 'Full Stack Java', where: 'Agencia de Aprendizaje a lo largo de la Vida', when: '2023 · 6 months' },
-      { what: 'React', where: 'Oracle', when: '2023' },
+      { what: 'University Degree in Computer Programming', where: 'UNSAM, 2022 – 2026. Databases, Concurrent and Distributed Programming, Networks, Algorithms I to III, Artificial Intelligence.' },
+      { what: 'Java University: zero to expert', where: 'Udemy, 2025. 150 hours.', url: 'https://ude.my/UC-0a1b81f8-2baf-4191-90af-627ed2af4b3d' },
+      { what: 'Unity Specialization', where: 'Codo a Codo 4.0, Buenos Aires City Government, 2022. 208 hours.' },
+      { what: 'Full Stack Java', where: 'Codo a Codo 4.0, Agencia de Aprendizaje a lo largo de la Vida, 2021. 198 hours.' },
+      { what: 'Oracle Next Education (ONE)', where: 'Oracle and Alura Latam, 2022 – 2023. Programming, HTML and CSS, Front End and React tracks.', url: 'https://app.aluracursos.com/user/cami-termine/degree-react-grupo4-one-15509/certificate' },
+      { what: 'Big data for effective public management', where: 'National Institute of Public Administration (INAP), 2024.' },
     ],
   },
 };
+
+/* Tramos de la línea de carrera, en años decimales. `end: null` = hoy.
+   Crisalu se superpone con SIGERH, por eso va en el carril de arriba. */
+const CAREER = [
+  { kind: 'archive', start: 2013.6, end: 2024.65, lane: 1 },
+  { kind: 'backend', start: 2024.7, end: 2025.8, lane: 1 },
+  { kind: 'games', start: 2025.6, end: null, lane: 0 },
+];
+const CAREER_TICKS = [2013, 2016, 2019, 2022, 2024];
 
 /* Reseñas reales de Goblin Cleanup, con la categoría que les asignó Claude en el proyecto. */
 const DEMO_REVIEWS = [
@@ -291,6 +422,7 @@ const STATS = [
   { cat: 'BUG', value: 449 }, { cat: 'FEATURE_REQUEST', value: 344 },
   { cat: 'POSITIVE', value: 1331 }, { cat: 'OTHER', value: 243 },
 ];
+const CAT_COLOR = { BUG: 'var(--bug)', FEATURE_REQUEST: 'var(--feature)', POSITIVE: 'var(--positive)', OTHER: 'var(--other)' };
 
 const STEAM_URL = 'https://store.steampowered.com/app/2748340/Goblin_Cleanup/';
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -314,12 +446,13 @@ function applyLanguage() {
     const value = t.ui[el.dataset.i18n];
     if (value !== undefined) el.innerHTML = value;
   });
-  renderTimeline(t);
-  renderProjects(t);
-  renderSkills(t);
-  renderEdu(t);
+  renderCareer(t);
+  renderJobs(t);
+  renderCatalog(t);
+  renderAbout(t);
+  renderLog(false);
   renderDemoReview(false);
-  observeReveals();
+  renderGame(false);
   // El CV se descarga en el idioma activo, con un nombre de archivo claro.
   $$('a[data-cv]').forEach(a => {
     a.href = `cv-${lang}.pdf`;
@@ -331,110 +464,124 @@ $('#lang-toggle').addEventListener('click', () => {
   lang = lang === 'es' ? 'en' : 'es';
   storage('lang', lang);
   applyLanguage();
-  restartTyping();
 });
 
 /* ============ Tema ============ */
 $('#theme-toggle').addEventListener('click', () => {
   const current = document.documentElement.dataset.theme
-    || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   const next = current === 'light' ? 'dark' : 'light';
   document.documentElement.dataset.theme = next;
   storage('theme', next);
 });
 
-/* ============ Render de secciones ============ */
-const chips = tags => `<ul class="chips">${tags.map(t => `<li>${t}</li>`).join('')}</ul>`;
+/* ============ Línea de carrera ============ */
+function renderCareer(t) {
+  const now = new Date();
+  const today = now.getFullYear() + now.getMonth() / 12;
+  const from = CAREER_TICKS[0];
+  const pct = y => `${((y - from) / (today - from)) * 100}%`;
 
-function renderTimeline(t) {
-  $('#timeline').innerHTML = t.jobs.map((job, i) => `
-    <li class="job reveal" style="--d:${i * 0.08}s">
-      <article class="job-card">
-        <div class="job-head">
-          <h3 class="job-role">${job.role}</h3>
-          <span class="job-date mono">${job.date}</span>
-        </div>
-        <p class="job-company">${job.company}</p>
-        <p class="job-context">${job.context}</p>
-        <ul>${job.points.map(p => `<li>${p}</li>`).join('')}</ul>
-        ${chips(job.tags)}
-      </article>
+  const segs = CAREER.map((s, i) => {
+    const end = s.end ?? today;
+    return `<span class="career-seg" data-kind="${s.kind}"
+      style="--l:${pct(s.start)};--w:calc(${pct(end)} - ${pct(s.start)});--top:${s.lane ? 30 : 6}px;--delay:${0.15 + i * 0.35}s"></span>`;
+  }).join('');
+  const ticks = CAREER_TICKS.map(y =>
+    `<span class="career-tick" style="--l:${pct(y)}" ${y % 3 === 1 && y !== 2013 ? 'data-minor' : ''}>${y}</span>`).join('')
+    + `<span class="career-tick" style="--l:100%">${t.career.today}</span>`;
+  $('#career-rail').innerHTML = segs + ticks;
+
+  $('#career-notes').innerHTML = t.career.notes.map(n => `
+    <li>
+      <span class="note-key" data-kind="${n.kind}" aria-hidden="true"></span>
+      <div><span class="note-when">${n.when}</span><p class="note-what">${n.what}</p></div>
+      <p class="note-fact">${n.fact}</p>
     </li>`).join('');
 }
 
-function renderProjects(t) {
-  const active = $('.filter.active')?.dataset.filter || 'all';
-  $('#cards').innerHTML = t.projects.map((p, i) => `
-    <article class="card reveal ${active !== 'all' && !p.cats.includes(active) ? 'hidden' : ''}"
-             data-cats="${p.cats.join(' ')}" style="--d:${(i % 3) * 0.08}s">
+/* ============ Render de secciones ============ */
+function renderJobs(t) {
+  $('#jobs').innerHTML = t.jobs.map(job => `
+    <li class="job">
+      <p class="job-when">${job.when}<span class="job-where">${job.where}</span></p>
+      <div>
+        <h3 class="job-role">${job.role}</h3>
+        <p class="job-company">${job.company}</p>
+        <p class="job-context">${job.context}</p>
+        <ul>${job.points.map(p => `<li>${p}</li>`).join('')}</ul>
+        <p class="stack">${job.stack}</p>
+      </div>
+    </li>`).join('');
+}
+
+function renderCatalog(t) {
+  const active = $('.tab[aria-pressed="true"]')?.dataset.filter || 'all';
+  $('#catalog').innerHTML = t.projects.map(p => `
+    <article class="entry" data-cats="${p.cats.join(' ')}" ${active !== 'all' && !p.cats.includes(active) ? 'hidden' : ''}>
+      <span class="entry-tab">${p.tab}</span>
       ${p.video ? `
-        <div class="card-media">
+        <div class="entry-media">
           <video src="${p.video}" muted loop playsinline preload="none" aria-label="${t.ui['card.video']}"></video>
-          <button class="media-toggle" aria-label="Play/Pause">▶</button>
+          <button class="media-toggle" aria-label="${t.ui['media.play']}">▶</button>
         </div>` : ''}
-      <div class="card-top"><span class="card-kind mono">${p.kind}</span></div>
+      <p class="entry-origin">${p.origin}</p>
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
-      ${chips(p.tags)}
-      ${p.code ? `<a class="card-link" href="${p.code}" target="_blank" rel="noopener">${t.ui['card.code']}</a>` : ''}
-      ${p.steam ? `<a class="card-link" href="${STEAM_URL}" target="_blank" rel="noopener">${t.ui['card.steam']}</a>` : ''}
+      <p class="stack">${p.stack}</p>
+      ${p.code || p.steam ? `<div class="entry-links">
+        ${p.code ? `<a href="${p.code}" target="_blank" rel="noopener">${t.ui['card.code']}</a>` : ''}
+        ${p.steam ? `<a href="${STEAM_URL}" target="_blank" rel="noopener">${t.ui['card.steam']}</a>` : ''}
+      </div>` : ''}
     </article>`).join('');
-  setupCards();
+  setupVideos(t);
 }
 
-function renderSkills(t) {
-  $('#skills-grid').innerHTML = t.skills.map((g, i) => `
-    <div class="skill-group reveal" style="--d:${(i % 3) * 0.08}s">
-      <h3><span aria-hidden="true">${g.icon}</span>${g.name}</h3>
-      ${chips(g.items)}
-    </div>`).join('');
+function renderAbout(t) {
+  const dl = rows => rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#facts').innerHTML = dl(t.facts);
+  $('#skills').innerHTML = dl(t.skills);
+  $('#edu').innerHTML = t.edu.map(e => `<li><strong>${e.what}</strong><span>${e.where}</span>${
+    e.url ? `<a href="${e.url}" target="_blank" rel="noopener">${t.ui['edu.cert']}</a>` : ''}</li>`).join('');
 }
 
-function renderEdu(t) {
-  $('#edu-list').innerHTML = t.edu.map(e => `
-    <li><div><strong>${e.what}</strong><span class="edu-where">${e.where}</span></div><span class="edu-when">${e.when}</span></li>`).join('');
-}
-
-/* ============ Filtros de proyectos ============ */
+/* ============ Filtros del catálogo ============ */
 $('#filters').addEventListener('click', e => {
-  const btn = e.target.closest('.filter');
+  const btn = e.target.closest('.tab');
   if (!btn) return;
-  $$('.filter').forEach(b => b.classList.toggle('active', b === btn));
+  $$('.tab').forEach(b => b.setAttribute('aria-pressed', b === btn));
   const f = btn.dataset.filter;
-  $$('.card').forEach(card => {
-    const show = f === 'all' || card.dataset.cats.split(' ').includes(f);
-    card.classList.toggle('hidden', !show);
-    if (show) card.classList.add('in');
+  $$('.entry').forEach(entry => {
+    entry.hidden = !(f === 'all' || entry.dataset.cats.split(' ').includes(f));
   });
 });
 
-/* ============ Tarjetas: brillo y videos ============ */
-const videoObserver = new IntersectionObserver(entries => {
-  entries.forEach(({ target, isIntersecting }) => {
-    const btn = target.parentElement.querySelector('.media-toggle');
-    if (isIntersecting && !reducedMotion && !target.dataset.paused) {
-      target.play().then(() => { btn.textContent = '❚❚'; }).catch(() => {});
-    } else {
-      target.pause();
-      btn.textContent = '▶';
-    }
-  });
-}, { threshold: 0.5 });
-
-function setupCards() {
-  $$('.card').forEach(card => {
-    card.addEventListener('pointermove', e => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--cx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--cy', `${e.clientY - r.top}px`);
+/* ============ Videos: se reproducen al verse, se pausan al salir ============ */
+let videoObserver;
+function setupVideos(t) {
+  videoObserver?.disconnect();
+  const setBtn = (btn, playing) => {
+    btn.textContent = playing ? '❚❚' : '▶';
+    btn.setAttribute('aria-label', t.ui[playing ? 'media.pause' : 'media.play']);
+  };
+  videoObserver = new IntersectionObserver(entries => {
+    entries.forEach(({ target, isIntersecting }) => {
+      const btn = target.parentElement.querySelector('.media-toggle');
+      if (isIntersecting && !reducedMotion && !target.dataset.paused) {
+        target.play().then(() => setBtn(btn, true)).catch(() => {});
+      } else {
+        target.pause();
+        setBtn(btn, false);
+      }
     });
-  });
-  $$('.card video').forEach(video => {
+  }, { threshold: 0.5 });
+
+  $$('.entry video').forEach(video => {
     videoObserver.observe(video);
     const btn = video.parentElement.querySelector('.media-toggle');
     const toggle = () => {
-      if (video.paused) { delete video.dataset.paused; video.play(); btn.textContent = '❚❚'; }
-      else { video.dataset.paused = '1'; video.pause(); btn.textContent = '▶'; }
+      if (video.paused) { delete video.dataset.paused; video.play(); setBtn(btn, true); }
+      else { video.dataset.paused = '1'; video.pause(); setBtn(btn, false); }
     };
     btn.addEventListener('click', toggle);
     video.addEventListener('click', toggle);
@@ -443,13 +590,12 @@ function setupCards() {
 
 /* ============ Demo del clasificador ============ */
 function renderChart() {
-  const total = STATS.reduce((s, x) => s + x.value, 0);
   const max = Math.max(...STATS.map(s => s.value));
   $('#demo-chart').innerHTML = STATS.map(s => `
     <div class="bar-row">
-      <span class="bar-label">${s.cat}</span>
-      <span class="bar-track"><span class="bar-fill" style="background:var(--${s.cat === 'FEATURE_REQUEST' ? 'feature' : s.cat.toLowerCase()})" data-w="${(s.value / max) * 100}"></span></span>
-      <span class="bar-value" title="${Math.round(s.value / total * 100)}%">${s.value.toLocaleString('es-AR')}</span>
+      <span>${s.cat}</span>
+      <span class="bar-track"><span class="bar-fill" style="--w:${(s.value / max) * 100}%;--c:${CAT_COLOR[s.cat]}"></span></span>
+      <span class="bar-value">${s.value.toLocaleString(lang === 'es' ? 'es-AR' : 'en-US')}</span>
     </div>`).join('');
 }
 
@@ -458,11 +604,11 @@ let demoTimer;
 function renderDemoReview(animate = true) {
   const t = DATA[lang].ui;
   const r = DEMO_REVIEWS[demoIndex];
-  $('#demo-meta').textContent = `${r.up ? '👍' : '👎'} [${r.lang}] · Goblin Cleanup`;
+  $('#demo-meta').textContent = `${r.up ? '👍' : '👎'} Goblin Cleanup, ${r.lang}`;
   $('#demo-text').textContent = `“${r.text}”`;
   const result = $('#demo-result');
   clearTimeout(demoTimer);
-  const show = () => { result.innerHTML = `${t['demo.result']} <span class="cat cat-${r.cat}">${r.cat}</span>`; };
+  const show = () => { result.innerHTML = `${t['demo.result']} <span class="cat" style="--c:${CAT_COLOR[r.cat]}">${r.cat}</span>`; };
   if (animate && !reducedMotion) {
     result.innerHTML = `<span class="thinking">${t['demo.thinking']}</span>`;
     demoTimer = setTimeout(show, 900);
@@ -475,85 +621,124 @@ $('#demo-next').addEventListener('click', () => {
   renderDemoReview(true);
 });
 
-/* ============ Texto que se escribe solo ============ */
-let typingTimer;
-function restartTyping() {
-  clearTimeout(typingTimer);
-  const el = $('#typed');
-  const roles = DATA[lang].roles;
-  if (reducedMotion) { el.textContent = roles[0]; return; }
-  let r = 0, i = roles[0].length, deleting = true;
-  el.textContent = roles[0];
-  const tick = () => {
-    const word = roles[r];
-    i += deleting ? -1 : 1;
-    el.textContent = word.slice(0, i);
-    let delay = deleting ? 40 : 80;
-    if (!deleting && i === word.length) { deleting = true; delay = 2200; }
-    else if (deleting && i === 0) { deleting = false; r = (r + 1) % roles.length; delay = 300; }
-    typingTimer = setTimeout(tick, delay);
-  };
-  typingTimer = setTimeout(tick, 2200);
+/* ============ Bitácora de Tic-Tac-Fade ============ */
+let logIndex = 0;
+function renderLog(animate = true) {
+  const t = DATA[lang];
+  const entry = t.log[logIndex];
+  const body = $('#log-body');
+  body.innerHTML = `
+    <h4 class="log-title">[${entry.n}] ${entry.title}</h4>
+    <p class="log-date">${entry.date}</p>
+    <dl class="log-fields">${entry.fields.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`;
+  $('#log-count').textContent = `${logIndex + 1} ${t.ui['log.of']} ${t.log.length}`;
+  if (animate) { body.classList.remove('swap'); void body.offsetWidth; body.classList.add('swap'); }
 }
+$('#log-prev').addEventListener('click', () => {
+  logIndex = (logIndex - 1 + DATA[lang].log.length) % DATA[lang].log.length;
+  renderLog();
+});
+$('#log-next').addEventListener('click', () => {
+  logIndex = (logIndex + 1) % DATA[lang].log.length;
+  renderLog();
+});
 
-/* ============ Contadores ============ */
-function animateCount(el) {
-  const to = Number(el.dataset.to);
-  const prefix = el.dataset.prefix || '';
-  const suffix = el.dataset.suffix || '';
-  const fmt = n => prefix + Math.round(n).toLocaleString(lang === 'es' ? 'es-AR' : 'en-US') + suffix;
-  if (reducedMotion) { el.textContent = fmt(to); return; }
-  const start = performance.now();
-  const dur = 1600;
-  const step = now => {
-    const p = Math.min((now - start) / dur, 1);
-    el.textContent = fmt(to * (1 - Math.pow(1 - p, 3)));
-    if (p < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
+/* ============ Tic-Tac-Fade jugable ============
+   Reglas del repo: cada jugador tiene como máximo 3 fichas; al poner la
+   cuarta desaparece la más vieja. Una jugada = un solo click. */
+const LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const MAX_PIECES = 3;
+const MARKS = {
+  X: '<svg viewBox="0 0 100 100" aria-hidden="true"><path class="mark" d="M18 18L82 82M82 18L18 82"/></svg>',
+  O: '<svg viewBox="0 0 100 100" aria-hidden="true"><circle class="mark" cx="50" cy="50" r="34"/></svg>',
+};
+const game = { mode: 'cpu', queues: { X: [], O: [] }, turn: 'X', winner: null, line: null, busy: false, last: null };
+let cpuTimer;
+
+// Aplica una jugada sobre una copia de las colas: devuelve el estado resultante sin tocar el original.
+function play(queues, cell, p) {
+  const next = { X: [...queues.X], O: [...queues.O] };
+  next[p].push(cell);
+  if (next[p].length > MAX_PIECES) next[p].shift();
+  return next;
 }
+const winningLine = (queues, p) => LINES.find(l => l.every(c => queues[p].includes(c))) || null;
+const emptyCells = queues => [...Array(9).keys()].filter(c => !queues.X.includes(c) && !queues.O.includes(c));
 
-/* ============ Animaciones al hacer scroll ============ */
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    el.classList.add('in');
-    $$('.count', el).forEach(animateCount);
-    if (el.classList.contains('featured')) {
-      $$('.bar-fill', el).forEach(b => { b.style.width = b.dataset.w + '%'; });
-    }
-    revealObserver.unobserve(el);
+// La máquina: gana si puede, si no bloquea, si no toma el centro, si no al azar.
+function cpuMove(queues) {
+  const free = emptyCells(queues);
+  const win = free.find(c => winningLine(play(queues, c, 'O'), 'O'));
+  if (win !== undefined) return win;
+  const safe = free.filter(c => {
+    const after = play(queues, c, 'O');
+    return !emptyCells(after).some(x => winningLine(play(after, x, 'X'), 'X'));
   });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-function observeReveals() {
-  $$('.reveal:not(.in), .reveal-stagger:not(.in)').forEach(el => revealObserver.observe(el));
-  $$('.reveal-stagger').forEach(group => {
-    [...group.children].forEach((c, i) => c.style.setProperty('--d', `${i * 0.1}s`));
-  });
+  const pool = safe.length ? safe : free;
+  if (pool.includes(4)) return 4;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
-/* Nav, barra de progreso, línea de tiempo y parallax: un solo listener de scroll */
-const nav = $('#nav');
-const progress = $('.scroll-progress');
-const timeline = $('#timeline');
-const heroGrid = $('.hero-grid');
+function move(cell) {
+  if (game.winner || game.busy) return;
+  const p = game.turn;
+  game.queues = play(game.queues, cell, p);
+  game.last = cell;
+  game.line = winningLine(game.queues, p);
+  if (game.line) game.winner = p;
+  else game.turn = p === 'X' ? 'O' : 'X';
+  const cpuTurn = !game.winner && game.mode === 'cpu' && game.turn === 'O';
+  game.busy = cpuTurn;
+  renderGame();
+  if (cpuTurn) {
+    cpuTimer = setTimeout(() => { game.busy = false; move(cpuMove(game.queues)); }, reducedMotion ? 0 : 450);
+  }
+}
+
+function renderGame(animate = true) {
+  const t = DATA[lang].ui;
+  // La ficha más vieja de quien juega ahora se va con su próxima jugada.
+  const q = game.queues[game.turn];
+  const fading = !game.winner && q.length === MAX_PIECES ? q[0] : null;
+  $('#board').innerHTML = [...Array(9).keys()].map(c => {
+    const p = game.queues.X.includes(c) ? 'X' : game.queues.O.includes(c) ? 'O' : null;
+    const blocked = !!p || !!game.winner || game.busy;
+    const cls = ['cell', animate && c === game.last ? 'placed' : '', c === fading ? 'fading' : '', game.line?.includes(c) ? 'win' : ''].join(' ');
+    const label = `${t['game.cell'].replace('{r}', Math.floor(c / 3) + 1).replace('{c}', c % 3 + 1)}: ${p || t['game.empty']}${c === fading ? `, ${t['game.fades']}` : ''}`;
+    return `<button class="${cls.trim()}" data-cell="${c}" ${p ? `data-p="${p}"` : ''} ${blocked ? 'disabled' : ''} aria-label="${label}">${p ? MARKS[p] : ''}</button>`;
+  }).join('');
+  game.last = animate ? null : game.last;
+
+  let status;
+  if (game.winner) status = game.mode === 'cpu' ? t[game.winner === 'X' ? 'game.youWin' : 'game.cpuWins'] : t['game.wins'].replace('{p}', game.winner);
+  else if (game.mode === 'cpu') status = game.busy ? t['game.thinking'] : t['game.you'];
+  else status = t['game.turn'].replace('{p}', game.turn);
+  $('#game-status').textContent = status;
+}
+
+function resetGame() {
+  clearTimeout(cpuTimer);
+  Object.assign(game, { queues: { X: [], O: [] }, turn: 'X', winner: null, line: null, busy: false, last: null });
+  renderGame();
+}
+$('#board').addEventListener('click', e => {
+  const cell = e.target.closest('.cell');
+  if (cell && !cell.disabled) move(Number(cell.dataset.cell));
+});
+$('#game-reset').addEventListener('click', resetGame);
+$('#game-modes').addEventListener('click', e => {
+  const btn = e.target.closest('.game-mode');
+  if (!btn || btn.dataset.mode === game.mode) return;
+  $$('.game-mode').forEach(b => b.setAttribute('aria-pressed', b === btn));
+  game.mode = btn.dataset.mode;
+  resetGame();
+});
+
+/* ============ Nav: link activo según la sección visible ============ */
 const sections = $$('main section[id]');
 const navLinks = $$('.nav-links a');
 let ticking = false;
-
 function onScroll() {
-  const y = window.scrollY;
-  const max = document.documentElement.scrollHeight - innerHeight;
-  progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-  nav.classList.toggle('scrolled', y > 20);
-  if (!reducedMotion) heroGrid.style.setProperty('--parallax', `${y * 0.25}px`);
-
-  const r = timeline.getBoundingClientRect();
-  const p = (innerHeight * 0.6 - r.top) / r.height;
-  timeline.style.setProperty('--progress', Math.max(0, Math.min(1, p)));
-
   let current = '';
   sections.forEach(s => { if (s.getBoundingClientRect().top <= innerHeight * 0.35) current = s.id; });
   navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current}`));
@@ -562,22 +747,6 @@ function onScroll() {
 addEventListener('scroll', () => {
   if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
 }, { passive: true });
-
-/* Brillo que sigue al cursor + inclinación de la tarjeta "sobre mí" */
-if (!reducedMotion && matchMedia('(pointer: fine)').matches) {
-  addEventListener('pointermove', e => {
-    document.body.style.setProperty('--mx', `${e.clientX}px`);
-    document.body.style.setProperty('--my', `${e.clientY}px`);
-  }, { passive: true });
-  const tilt = $('.tilt');
-  tilt.addEventListener('pointermove', e => {
-    const r = tilt.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    tilt.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
-  });
-  tilt.addEventListener('pointerleave', () => { tilt.style.transform = ''; });
-}
 
 /* Menú mobile */
 const menuBtn = $('#menu-toggle');
@@ -593,11 +762,11 @@ links.addEventListener('click', e => {
 /* Copiar email */
 $('#copy-email').addEventListener('click', async () => {
   const email = $('#email-link').textContent.trim();
+  const c = $('#copied');
   try {
     await navigator.clipboard.writeText(email);
-    const c = $('#copied');
-    c.classList.add('show');
-    setTimeout(() => c.classList.remove('show'), 1600);
+    c.textContent = DATA[lang].ui['contact.copied'];
+    setTimeout(() => { c.textContent = ''; }, 2000);
   } catch (e) { location.href = `mailto:${email}`; }
 });
 
@@ -605,5 +774,4 @@ $('#copy-email').addEventListener('click', async () => {
 $('#year').textContent = new Date().getFullYear();
 renderChart();
 applyLanguage();
-restartTyping();
 onScroll();
