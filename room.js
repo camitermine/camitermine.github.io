@@ -11,6 +11,7 @@ const ROWS = 12;
 const WALL = 3;        // filas de pared arriba
 const SPEED = 110;
 const REACH = 52;      // distancia para poder interactuar
+const CAT_SPEED = 42;
 
 const EMAIL = 'camila.termine@gmail.com';
 const SOCIALS = [
@@ -27,7 +28,9 @@ const ROOM_TEXT = {
     labels: {
       desk: 'GenAI', bookshelf: 'Experiencia', tv: 'Proyectos', whiteboard: 'Stack',
       beanbag: 'Sobre mí', corkboard: 'Formación y CV', mailbox: 'Contacto', arcade: 'Tic-Tac-Fade',
+      cat: 'Acariciar al gato',
     },
+    purrs: ['prrr~', 'miau ♪', 'purr purr', 'mrrrp!', '*ronronea*'],
     cv: 'Descargar CV (PDF)', video: 'Ver video', steam: 'Ver en Steam', email: 'Escribime',
     ttf: { cpu: 'Contra la máquina', pvp: 'Dos jugadores', reset: 'Nueva partida', turn: p => `Turno de ${p}`, win: p => `¡Ganó ${p}!`, cpuTurn: 'Pensando…' },
   },
@@ -38,7 +41,9 @@ const ROOM_TEXT = {
     labels: {
       desk: 'GenAI', bookshelf: 'Experience', tv: 'Projects', whiteboard: 'Stack',
       beanbag: 'About me', corkboard: 'Education & CV', mailbox: 'Contact', arcade: 'Tic-Tac-Fade',
+      cat: 'Pet the cat',
     },
+    purrs: ['prrr~', 'meow ♪', 'purr purr', 'mrrrp!', '*purrs*'],
     cv: 'Download CV (PDF)', video: 'Watch video', steam: 'View on Steam', email: 'Email me',
     ttf: { cpu: 'Vs. computer', pvp: 'Two players', reset: 'New game', turn: p => `${p} to move`, win: p => `${p} wins!`, cpuTurn: 'Thinking…' },
   },
@@ -284,6 +289,8 @@ class Room extends Phaser.Scene {
     this.load.spritesheet('floor', 'assets/game/floor-rug-tileset.png', { frameWidth: TILE, frameHeight: TILE });
     this.load.spritesheet('walk', 'assets/game/player/walk.png', { frameWidth: 48, frameHeight: 48 });
     this.load.spritesheet('idle', 'assets/game/player/idle.png', { frameWidth: 48, frameHeight: 48 });
+    this.load.spritesheet('cat-walk', 'assets/game/cat/walk.png', { frameWidth: 48, frameHeight: 48 });
+    this.load.spritesheet('cat-sit', 'assets/game/cat/sit.png', { frameWidth: 48, frameHeight: 48 });
     FURNITURE.forEach(f => this.load.image(f.key, `assets/game/furniture/${f.key}.png`));
   }
 
@@ -313,6 +320,7 @@ class Room extends Phaser.Scene {
     this.physics.add.collider(this.player, this.solids);
     this.facing = 0;
     this.player.play('idle-0');
+    this.makeCat();
 
     this.prompt = this.add.text(0, 0, '', {
       fontFamily: 'Pixelify Sans', fontSize: '11px', color: '#1a1423',
@@ -379,12 +387,103 @@ class Room extends Phaser.Scene {
     }
   }
 
+  /* ============ Gato ============ */
+
+  makeCat() {
+    const sitFrames = (this.textures.get('cat-sit').frameTotal - 1) / 8;
+    for (let d = 0; d < 8; d++) {
+      this.anims.create({ key: `cat-walk-${d}`, frames: this.anims.generateFrameNumbers('cat-walk', { start: d * 6, end: d * 6 + 5 }), frameRate: 9, repeat: -1 });
+      this.anims.create({ key: `cat-sit-${d}`, frames: this.anims.generateFrameNumbers('cat-sit', { start: d * sitFrames, end: (d + 1) * sitFrames - 1 }), frameRate: 8 });
+    }
+
+    // Corazón de 7x6 px, en los colores de la paleta
+    const heart = ['.11.11.', '1221111', '1211111', '.11111.', '..111..', '...1...'];
+    const g = this.make.graphics({ add: false });
+    heart.forEach((row, y) => [...row].forEach((p, x) => {
+      if (p !== '.') g.fillStyle(p === '2' ? 0xffe2e8 : 0xff7fa6).fillRect(x, y, 1, 1);
+    }));
+    g.generateTexture('heart', 7, 6);
+    g.destroy();
+
+    this.cat = this.physics.add.sprite(380, 236, 'cat-sit', 0).setOrigin(0.5, 0.85);
+    this.cat.body.setSize(14, 6).setOffset(17, 35);
+    this.cat.setCollideWorldBounds(true);
+    this.physics.add.collider(this.cat, this.solids);
+    this.cat.facing = 0;
+    this.catState = { mode: 'sit', until: this.time.now + 2500, target: null, stuck: 0 };
+    this.cat.play('cat-sit-0');
+    this.cat.setInteractive({ useHandCursor: true });
+    this.cat.on('pointerdown', () => this.walkTo(this.cat.x, this.cat.y + 14, 'cat'));
+  }
+
+  catSit(ms) {
+    this.cat.setVelocity(0, 0);
+    this.catState = { mode: 'sit', until: this.time.now + ms, target: null, stuck: 0 };
+    this.cat.play(`cat-sit-${this.cat.facing}`);
+  }
+
+  updateCat() {
+    const c = this.cat;
+    const s = this.catState;
+    const now = this.time.now;
+    if (s.mode === 'sit') {
+      if (now < s.until || panelOpen) return;
+      // Elegir un punto libre del piso al azar
+      const x = Phaser.Math.Between(30, COLS * TILE - 30);
+      const y = Phaser.Math.Between(WALL * TILE + 60, ROWS * TILE - 20);
+      this.catState = { mode: 'walk', target: { x, y }, stuck: 0, until: now + 8000 };
+      return;
+    }
+    const dx = s.target.x - c.x;
+    const dy = s.target.y - c.y;
+    const dist = Math.hypot(dx, dy);
+    const b = c.body.blocked;
+    if (b.left || b.right || b.up || b.down) s.stuck++;
+    if (dist < 4 || s.stuck > 25 || now > s.until) {
+      this.catSit(Phaser.Math.Between(2500, 6000));
+      return;
+    }
+    c.setVelocity((dx / dist) * CAT_SPEED, (dy / dist) * CAT_SPEED);
+    c.facing = OCTANT_TO_ROW[(Math.round(Math.atan2(dy, dx) / (Math.PI / 4)) + 8) % 8];
+    c.anims.play(`cat-walk-${c.facing}`, true);
+    c.setDepth(c.y);
+  }
+
+  petCat() {
+    const c = this.cat;
+    // Se da vuelta para mirar a quien lo acaricia y se queda un rato
+    const oct = (Math.round(Math.atan2(this.player.y - c.y, this.player.x - c.x) / (Math.PI / 4)) + 8) % 8;
+    c.facing = OCTANT_TO_ROW[oct];
+    this.catSit(5000);
+    c.setDepth(c.y);
+    this.pettingUntil = this.time.now + 1800; // sin el cartel "E" encima del ronroneo
+
+    const purrs = ROOM_TEXT[lang].purrs;
+    // El cartel va arriba y los corazones suben entre el gato y el cartel, sin taparlo
+    const bubble = this.add.text(c.x, c.y - 48, Phaser.Utils.Array.GetRandom(purrs), {
+      fontFamily: 'Pixelify Sans', fontSize: '10px', color: '#1a1423',
+      backgroundColor: '#f2e8d8', padding: { x: 4, y: 2 },
+    }).setOrigin(0.5, 1).setDepth(10001).setResolution(4);
+    this.tweens.add({ targets: bubble, y: bubble.y - 10, alpha: 0, delay: 900, duration: 700, onComplete: () => bubble.destroy() });
+
+    for (let i = 0; i < 3; i++) {
+      const h = this.add.image(c.x + (i - 1) * 12, c.y - 20, 'heart').setScale(2).setDepth(10000).setAlpha(0);
+      this.tweens.add({
+        targets: h, y: h.y - Phaser.Math.Between(10, 16), x: h.x + Phaser.Math.Between(-3, 3),
+        alpha: { from: 1, to: 0 }, delay: i * 220, duration: 1100, ease: 'Sine.easeOut',
+        onComplete: () => h.destroy(),
+      });
+    }
+  }
+
   walkTo(x, y, openKey) {
     this.target = { x, y, openKey, stuck: 0 };
   }
 
   interact() {
-    if (this.nearest) openPanel(this.nearest.key);
+    if (!this.nearest) return;
+    if (this.nearest.key === 'cat') this.petCat();
+    else openPanel(this.nearest.key);
   }
 
   update() {
@@ -406,7 +505,9 @@ class Room extends Phaser.Scene {
       if (dist < 4 || this.target.stuck > 20) {
         const key = this.target.openKey;
         this.target = null;
-        if (key && this.distanceTo(this.interactables.find(i => i.key === key)) < REACH + 30) openPanel(key);
+        if (key === 'cat') {
+          if (Math.hypot(this.cat.x - this.player.x, this.cat.y - this.player.y) < REACH + 20) this.petCat();
+        } else if (key && this.distanceTo(this.interactables.find(i => i.key === key)) < REACH + 30) openPanel(key);
       } else {
         vx = dx / dist;
         vy = dy / dist;
@@ -424,6 +525,7 @@ class Room extends Phaser.Scene {
     }
     this.player.setDepth(this.player.y);
 
+    this.updateCat();
     this.updatePrompt();
   }
 
@@ -440,10 +542,13 @@ class Room extends Phaser.Scene {
       const d = this.distanceTo(f);
       if (d < bestD) { best = f; bestD = d; }
     });
+    // El gato se mueve, así que se mide a su posición actual
+    const catD = Math.hypot(this.cat.x - this.player.x, this.cat.y - this.player.y) - 8;
+    if (catD < bestD) best = { key: 'cat', x: this.cat.x, y: this.cat.y, img: { height: 34 } };
     this.interactables.forEach(f => f.img.setTint(f === best ? 0xfff2d6 : 0xffffff));
     this.nearest = best;
     $('#act-btn').hidden = !(best && isTouch);
-    if (best) {
+    if (best && !(best.key === 'cat' && this.time.now < this.pettingUntil)) {
       const label = ROOM_TEXT[lang].labels[best.key];
       this.prompt.setText(isTouch ? label : `E · ${label}`);
       this.prompt.setPosition(best.x, best.y - best.img.height - 2).setVisible(true);
