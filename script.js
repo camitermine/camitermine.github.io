@@ -57,6 +57,7 @@ function applyLanguage() {
   renderAbout(t);
   renderLog(false);
   renderDemoReview(false);
+  if (ragSeen) renderRag(false);
   renderGame(false);
   // El CV se descarga en el idioma activo, con un nombre de archivo claro.
   $$('a[data-cv]').forEach(a => {
@@ -225,6 +226,75 @@ $('#demo-next').addEventListener('click', () => {
   demoIndex = (demoIndex + 1) % DEMO_REVIEWS.length;
   renderDemoReview(true);
 });
+
+/* ============ Demo de Salas de Estudio ============ */
+// Datos de ejemplo: se tipea una pregunta, se buscan fragmentos en la sala y la respuesta se genera con citas.
+let ragIndex = 0;
+let ragTimer;
+let ragSeen = false;
+const escapeHtml = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const withCites = s => escapeHtml(s).replace(/\[(\d)\]/g, '<span class="cite">$1</span>');
+
+function renderRag(animate = true) {
+  const t = DATA[lang];
+  const u = t.ui;
+  const item = t.rag.qa[ragIndex];
+  $('#rag-rooms').innerHTML = t.rag.rooms.map(r => `
+    <li${r.active ? ' aria-current="true"' : ''}>${r.name}<small>${r.docs} ${u['rag.docs']}</small></li>`).join('');
+  const q = $('#rag-q'), status = $('#rag-status'), a = $('#rag-a'), src = $('#rag-src');
+  const found = u['rag.found'].replace('{n}', item.src.length);
+  const sources = item.src.map(([doc, page], i) => `<li><span class="cite">${i + 1}</span>${doc}, p. ${page}</li>`).join('');
+  clearTimeout(ragTimer);
+  q.classList.remove('typing');
+  src.classList.remove('swap');
+
+  if (!animate || reducedMotion) {
+    q.textContent = item.q;
+    status.textContent = found;
+    a.innerHTML = withCites(item.a);
+    src.innerHTML = sources;
+    return;
+  }
+
+  q.textContent = status.textContent = src.innerHTML = '';
+  a.innerHTML = '';
+  const words = item.a.split(' ');
+  let i = 0;
+  // Cada paso devuelve cuánto esperar hasta el siguiente tick, o null al terminar.
+  const steps = [
+    () => { // la pregunta se tipea
+      q.classList.add('typing');
+      q.textContent = item.q.slice(0, ++i);
+      if (i < item.q.length) return 28;
+      q.classList.remove('typing');
+      i = 0; step++; return 350;
+    },
+    () => { status.innerHTML = `<span class="thinking">${u['rag.searching']}</span>`; step++; return 900; },
+    () => { status.textContent = found; step++; return 300; },
+    () => { // la respuesta se genera de a palabras
+      a.innerHTML = withCites(words.slice(0, ++i).join(' '));
+      if (i < words.length) return 45;
+      step++; return 200;
+    },
+    () => { src.innerHTML = sources; src.classList.add('swap'); return null; },
+  ];
+  let step = 0;
+  (function tick() {
+    const delay = steps[step]();
+    if (delay != null) ragTimer = setTimeout(tick, delay);
+  })();
+}
+$('#rag-next').addEventListener('click', () => {
+  ragIndex = (ragIndex + 1) % DATA[lang].rag.qa.length;
+  renderRag(true);
+});
+// La primera animación arranca cuando la demo entra en pantalla.
+new IntersectionObserver((entries, obs) => {
+  if (!entries[0].isIntersecting) return;
+  obs.disconnect();
+  ragSeen = true;
+  renderRag(true);
+}, { threshold: 0.4 }).observe($('#rag'));
 
 /* ============ Bitácora de Tic-Tac-Fade ============ */
 let logIndex = 0;

@@ -125,6 +125,11 @@ const PANELS = {
     <p>${u['sri.desc']}</p>
     ${list([u['sri.p1'], u['sri.p2'], u['sri.p3']])}
     <p class="links">${link('https://github.com/camitermine/steam-review-insights', u['link.code'])}</p>
+    <h3>Salas de Estudio</h3>
+    <p class="sub">${u['sed.sub']}</p>
+    <p>${u['sed.desc']}</p>
+    ${list([u['sed.p1'], u['sed.p2'], u['sed.p3']])}
+    <p class="links">${link('https://github.com/camitermine/salas-de-estudio', u['link.code'])}</p>
     <h3>Tic-Tac-Fade</h3>
     <p class="sub">${u['ttf.sub']}</p>
     <p>${u['ttf.desc']}</p>

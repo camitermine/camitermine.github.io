@@ -44,10 +44,10 @@
   <dl class="skills">
     <dt>Lenguajes</dt><dd>Java, Kotlin, TypeScript, JavaScript, Python, C#, SQL, HTML5, CSS3</dd>
     <dt>Backend</dt><dd>Spring Boot, FastAPI, Hibernate, JPA, Struts 2, APIs REST, OpenAPI/Swagger, JasperReports, arquitectura en capas, patrones de diseño (Repository, Factory, Strategy, Observer, Command, MVC/MVVM), integración con servicios externos</dd>
-    <dt>Bases de datos</dt><dd>MySQL, PostgreSQL, HBase (NoSQL), Flyway, modelado relacional y NoSQL, optimización de consultas SQL</dd>
+    <dt>Bases de datos</dt><dd>MySQL, PostgreSQL, pgvector, HBase (NoSQL), Flyway, modelado relacional y NoSQL, optimización de consultas SQL</dd>
     <dt>Frontend</dt><dd>React, TypeScript, React Native (Expo), consumo asíncrono de APIs REST, gestión de estado, validaciones y manejo de errores</dd>
     <dt>Testing y DevOps</dt><dd>JUnit, Mockito, Testcontainers, tests unitarios y de integración, CI/CD (GitHub Actions, Jenkins), Docker, Docker Compose, Git, GlassFish, Linux</dd>
-    <dt>IA y automatización</dt><dd>Claude API (Anthropic Java SDK), structured outputs, Claude Code, Model Context Protocol (MCP), agentes de revisión de código, n8n, prompt engineering</dd>
+    <dt>IA y automatización</dt><dd>Claude API (Anthropic Java SDK), structured outputs, RAG (embeddings, búsqueda vectorial, citas), Claude Code, Model Context Protocol (MCP), agentes de revisión de código, n8n, prompt engineering</dd>
     <dt>Cliente-servidor</dt><dd>Unity, FishNet (netcode con host autoritativo), Steamworks SDK, serialización y persistencia de estado</dd>
     <dt>Prácticas</dt><dd>Scrum, Kanban, pull requests y code review, documentación técnica, Clean Code, Jira</dd>
   </dl>
@@ -91,6 +91,14 @@
       <li>Desarrollé una API REST con Spring Boot que importa las 2.367 reseñas de Goblin Cleanup desde la API pública de Steam y clasifica el feedback de usuarios con Claude Haiku 4.5 en 24 idiomas: detecté 449 reportes de bugs y 344 pedidos de mejora por menos de USD 1.</li>
       <li>Reduje el costo agrupando 20 reseñas por llamada con structured outputs, y diseñé el procesamiento por lotes para que se retome sin pérdidas si la API falla.</li>
       <li>Automaticé con n8n un resumen semanal en Discord con los nuevos bugs y pedidos de mejora; dockericé la aplicación con PostgreSQL, migraciones Flyway y Docker Compose, con CI en GitHub Actions y 25 tests (JUnit, Mockito, Testcontainers).</li>
+    </ul>
+  </div>
+  <div class="item">
+    <div class="head"><h3>Salas de Estudio, asistente con RAG: Python, FastAPI, pgvector, Claude API, React</h3><span class="repo">github.com/camitermine/salas-de-estudio</span></div>
+    <ul>
+      <li>Asistente de estudio con RAG (en desarrollo): cada materia es una sala con sus PDFs y el chat responde solo con esos documentos, citando documento y página.</li>
+      <li>Implementé la ingesta de PDFs (texto por página, fragmentos con solapamiento, embeddings locales con multilingual-e5) y la búsqueda por similitud coseno en PostgreSQL con pgvector, filtrada por sala para aislar cada materia.</li>
+      <li>Abstraje los proveedores de LLM detrás de una misma interfaz: Claude Haiku como principal y Gemini de respaldo; tests con pytest y frontend en React y TypeScript.</li>
     </ul>
   </div>
   <div class="item">

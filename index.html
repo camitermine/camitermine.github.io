@@ -140,6 +140,35 @@
           </div>
         </article>
 
+        <article class="feature" aria-labelledby="sed-title">
+          <div class="feature-info">
+            <h3 id="sed-title">Salas de Estudio</h3>
+            <p class="feature-sub" data-i18n="sed.sub">Asistente de estudio con RAG que responde con tus apuntes y cita la página</p>
+            <p data-i18n="sed.desc"></p>
+            <ul class="points">
+              <li data-i18n="sed.p1"></li>
+              <li data-i18n="sed.p2"></li>
+              <li data-i18n="sed.p3"></li>
+            </ul>
+            <p class="stack">Python, FastAPI, PostgreSQL + pgvector, multilingual-e5, Claude Haiku, Gemini, React, TypeScript</p>
+            <a class="btn btn-ghost btn-small" href="https://github.com/camitermine/salas-de-estudio" target="_blank" rel="noopener" data-i18n="link.code">Ver código en GitHub</a>
+          </div>
+
+          <div class="demo rag" id="rag">
+            <p class="demo-endpoint mono" data-i18n="rag.label">Demo con datos de ejemplo</p>
+            <div class="rag-window">
+              <ul class="rag-rooms" id="rag-rooms"></ul>
+              <div class="rag-chat" aria-live="polite">
+                <p class="rag-q" id="rag-q"></p>
+                <p class="rag-status" id="rag-status"></p>
+                <p class="rag-a" id="rag-a"></p>
+                <ol class="rag-src" id="rag-src"></ol>
+              </div>
+            </div>
+            <button class="btn btn-ghost btn-small" id="rag-next" data-i18n="rag.next">Hacer otra pregunta</button>
+          </div>
+        </article>
+
         <article class="feature feature-log" aria-labelledby="ttf-title">
           <div class="feature-info">
             <h3 id="ttf-title">Tic-Tac-Fade</h3>
