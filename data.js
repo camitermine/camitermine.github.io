@@ -142,9 +142,10 @@ const DATA = {
         code: 'https://github.com/camitermine/Pasaporte-BA',
       },
       {
-        name: 'MercadoLite y MercadoLite Envíos', origin: 'UNSAM (grupal)', tab: 'Frontend y backend', cats: ['frontend', 'backend'],
-        desc: 'Un marketplace en React y TypeScript sobre un framework MVVM, con búsqueda, filtros, paginación y pedidos con estados. Y un sistema de envíos con API REST propia en Kotlin, dashboard de KPIs y ABM de transportistas: cada pedido del marketplace genera un envío a través de la API.',
-        stack: 'React, TypeScript, Kotlin, APIs REST, GitHub Actions',
+        name: 'MercadoLite y MercadoLite Envíos', origin: 'Algoritmos III, UNSAM (grupal)', tab: 'Frontend y backend', cats: ['frontend', 'backend'],
+        desc: 'Dos apps web que comparten una API REST en Kotlin y Spring Boot. En la tienda, hecha en TypeScript con un framework MVVM, el cliente busca productos, compra y sigue sus pedidos. En el panel de envíos, hecho en React y Material UI, el operador ve los pedidos pendientes, les asigna un transportista, sigue los envíos y administra los transportistas. Errores con un formato único, estados calculados y 354 tests con CI. Se levanta todo con un solo script y datos de prueba.',
+        stack: 'Kotlin, Spring Boot, React, TypeScript, Material UI, Vitest, GitHub Actions',
+        code: 'https://github.com/camitermine/mercadolite-envios',
       },
       {
         name: 'Goblin Cleanup: sistema de guardado', origin: 'Crisalu Games', tab: 'Backend', cats: ['backend', 'gamedev'],
@@ -369,9 +370,10 @@ const DATA = {
         code: 'https://github.com/camitermine/Pasaporte-BA',
       },
       {
-        name: 'MercadoLite and MercadoLite Envíos', origin: 'UNSAM (team)', tab: 'Frontend and backend', cats: ['frontend', 'backend'],
-        desc: 'A React and TypeScript marketplace on an MVVM framework, with search, filters, pagination and orders with states. Plus a shipping system with its own Kotlin REST API, a KPI dashboard and carrier management: every marketplace order creates a shipment through the API.',
-        stack: 'React, TypeScript, Kotlin, REST APIs, GitHub Actions',
+        name: 'MercadoLite and MercadoLite Envíos', origin: 'Algorithms III, UNSAM (team)', tab: 'Frontend and backend', cats: ['frontend', 'backend'],
+        desc: 'Two web apps that share a Kotlin and Spring Boot REST API. In the store, built in TypeScript on an MVVM framework, customers search products, place orders and track them. In the shipping panel, built with React and Material UI, the operator picks up pending orders, assigns a carrier, tracks shipments and manages carriers. Consistent error format, computed statuses and 354 tests running in CI. One script starts everything with sample data.',
+        stack: 'Kotlin, Spring Boot, React, TypeScript, Material UI, Vitest, GitHub Actions',
+        code: 'https://github.com/camitermine/mercadolite-envios',
       },
       {
         name: 'Goblin Cleanup: save system', origin: 'Crisalu Games', tab: 'Backend', cats: ['backend', 'gamedev'],
